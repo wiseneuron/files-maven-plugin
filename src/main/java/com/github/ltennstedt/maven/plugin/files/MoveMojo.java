@@ -26,14 +26,14 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 /**
- * Mojo for copying files and directories
+ * Mojo for moving files and directories
  *
  * @author Lars Tennstedt
  * @since 1
  *
  */
-@Mojo(name = "copy")
-public final class CopyMojo extends AbstractMojo {
+@Mojo(name = "move")
+public final class MoveMojo extends AbstractMojo {
     /**
      * Source file or directory
      */
@@ -53,16 +53,16 @@ public final class CopyMojo extends AbstractMojo {
             .append(into.getAbsolutePath()).toString());
         try {
             if (into.isFile()) {
-                FileUtils.copyFileToDirectory(from, into);
+                FileUtils.moveFileToDirectory(from, into, false);
             } else {
-                FileUtils.copyDirectory(from, into);
+                FileUtils.moveDirectoryToDirectory(from, into, false);
             }
         } catch (final IOException exception) {
-            final String message = "copying failed";
+            final String message = "moving failed";
             getLog().error(message);
             throw new MojoExecutionException(message, exception);
         }
-        getLog().info("Copying successful");
+        getLog().info("Moving successful");
     }
 
     private void check() throws MojoExecutionException {
