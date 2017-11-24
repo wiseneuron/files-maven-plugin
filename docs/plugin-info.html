@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>files-maven-plugin - PMD Results</title>
+    <title>files-maven-plugin - Plugin Documentation</title>
     <style type="text/css" media="all">
       @import url("./css/maven-base.css");
       @import url("./css/maven-theme.css");
@@ -60,14 +60,14 @@
                           <a href="spotbugs.html" title="SpotBugs">SpotBugs</a>
             </li>
                       <li class="none">
-            <strong>PMD</strong>
-          </li>
+                          <a href="pmd.html" title="PMD">PMD</a>
+            </li>
                       <li class="none">
                           <a href="apidocs/index.html" title="JavaDocs">JavaDocs</a>
             </li>
                       <li class="none">
-                          <a href="plugin-info.html" title="Plugin Documentation">Plugin Documentation</a>
-            </li>
+            <strong>Plugin Documentation</strong>
+          </li>
               </ul>
         </li>
           </ul>
@@ -81,10 +81,63 @@
     <div id="bodyColumn">
       <div id="contentBox">
         <div class="section">
-<h2>PMD Results<a name="PMD_Results"></a></h2>
-<p>The following document contains the results of <a class="externalLink" href="http://pmd.sourceforge.net/">PMD</a> 5.6.1.</p></div>
+<h2>Plugin Documentation<a name="Plugin_Documentation"></a></h2><a name="Plugin_Documentation"></a>
+<p>Goals available for this plugin:</p>
+<table border="0" class="bodyTable">
+<tr class="a">
+<th>Goal</th>
+<th>Description</th></tr>
+<tr class="b">
+<td><a href="copy-mojo.html">files:copy</a></td>
+<td>No description.</td></tr></table>
 <div class="section">
-<h2>Files<a name="Files"></a></h2></div>
+<h3>System Requirements<a name="System_Requirements"></a></h3><a name="System_Requirements"></a>
+<p>The following specifies the minimum requirements to run this Maven plugin:</p>
+<table border="0" class="bodyTable">
+<tr class="a">
+<td>Maven</td>
+<td>3.5</td></tr>
+<tr class="b">
+<td>JDK</td>
+<td>1.8</td></tr>
+<tr class="a">
+<td>Memory</td>
+<td>No minimum requirement.</td></tr>
+<tr class="b">
+<td>Disk Space</td>
+<td>No minimum requirement.</td></tr></table></div>
+<div class="section">
+<h3>Usage<a name="Usage"></a></h3><a name="Usage"></a>
+<p>You should specify the version in your project's plugin configuration:</p>
+<div class="source">
+<pre>&lt;project&gt;
+  ...
+  &lt;build&gt;
+    &lt;!-- To define the plugin version in your parent POM --&gt;
+    &lt;pluginManagement&gt;
+      &lt;plugins&gt;
+        &lt;plugin&gt;
+          &lt;groupId&gt;com.github.ltennstedt&lt;/groupId&gt;
+          &lt;artifactId&gt;files-maven-plugin&lt;/artifactId&gt;
+          &lt;version&gt;1-SNAPSHOT&lt;/version&gt;
+        &lt;/plugin&gt;
+        ...
+      &lt;/plugins&gt;
+    &lt;/pluginManagement&gt;
+    &lt;!-- To use the plugin goals in your POM or parent POM --&gt;
+    &lt;plugins&gt;
+      &lt;plugin&gt;
+        &lt;groupId&gt;com.github.ltennstedt&lt;/groupId&gt;
+        &lt;artifactId&gt;files-maven-plugin&lt;/artifactId&gt;
+        &lt;version&gt;1-SNAPSHOT&lt;/version&gt;
+      &lt;/plugin&gt;
+      ...
+    &lt;/plugins&gt;
+  &lt;/build&gt;
+  ...
+&lt;/project&gt;
+</pre></div>
+<p>For more information, see <a class="externalLink" href="http://maven.apache.org/guides/mini/guide-configuring-plugins.html">&quot;Guide to Configuring Plug-ins&quot;</a></p></div></div>
       </div>
     </div>
     <div class="clear">
