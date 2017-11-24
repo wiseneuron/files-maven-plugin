@@ -16,6 +16,8 @@
 package com.github.ltennstedt.maven.plugin.files;
 
 import java.io.File;
+import java.io.IOException;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -23,17 +25,73 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
+/**
+ * Mojo for copying files and directories
+ *
+ * @author Lars Tennstedt
+ * @since 1
+ *
+ */
 @Mojo(name = "copy")
 public final class CopyMojo extends AbstractMojo {
-    @Parameter
+    /**
+     * Source file or directory
+     */
+    @Parameter(required = true)
     private File from;
 
-    @Parameter
+    /**
+     * Target directory
+     */
+    @Parameter(required = true)
     private File into;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        // TODO Auto-generated method stub
+        check();
+        getLog().info(new StringBuilder("Copy ").append(from.getAbsolutePath()).append(" into ")
+            .append(into.getAbsolutePath()).toString());
+        try {
+            if (into.isFile()) {
+                FileUtils.copyFileToDirectory(from, into);
+            } else {
+                FileUtils.copyDirectory(from, into);
+            }
+        } catch (final IOException exception) {
+            final String message = "copying failed";
+            getLog().error(message);
+            throw new MojoExecutionException(message, exception);
+        }
+    }
+
+    private void check() throws MojoExecutionException {
+        if (!from.exists()) {
+            final String message = "from does not exists";
+            getLog().error(message);
+            throw new MojoExecutionException(message);
+        }
+        if (!from.canRead()) {
+            final String message = "from not readable";
+            getLog().error(message);
+            throw new MojoExecutionException(message);
+        }
+        if (into.exists()) {
+            if (into.isFile()) {
+                final String message = "into exists and is a file";
+                getLog().error(message);
+                throw new MojoExecutionException(message);
+            }
+            if (!into.canWrite()) {
+                final String message = "into not writeable";
+                getLog().error(message);
+                throw new MojoExecutionException(message);
+            }
+        }
+        if (!into.mkdirs()) {
+            final String message = "Directories could not be created";
+            getLog().error(message);
+            throw new MojoExecutionException(message);
+        }
     }
 
     @Override
