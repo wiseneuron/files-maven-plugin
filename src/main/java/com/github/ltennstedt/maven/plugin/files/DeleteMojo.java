@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.github.ltennstedt.maven.plugin.files;
 
 import java.io.File;
@@ -38,7 +39,7 @@ public final class DeleteMojo extends AbstractMojo {
      * File or directory which will be deleted
      */
     @Parameter(required = true)
-    private File file;
+    File file;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {

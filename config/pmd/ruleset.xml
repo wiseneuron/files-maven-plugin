@@ -28,6 +28,7 @@
         <exclude name="OnlyOneReturn" />
         <exclude name="UnnecessaryParentheses" />
         <exclude name="UseConcurrentHashMap" />
+        <exclude name="DefaultPackage" />
     </rule>
     <rule ref="rulesets/java/coupling.xml">
         <exclude name="LawOfDemeter" />

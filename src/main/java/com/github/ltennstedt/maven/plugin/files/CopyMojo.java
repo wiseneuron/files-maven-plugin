@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.github.ltennstedt.maven.plugin.files;
 
 import java.io.File;
@@ -38,13 +39,13 @@ public final class CopyMojo extends AbstractMojo {
      * Source file or directory
      */
     @Parameter(required = true)
-    private File file;
+    File file;
 
     /**
      * Target directory
      */
     @Parameter(required = true)
-    private File into;
+    File into;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -66,7 +67,7 @@ public final class CopyMojo extends AbstractMojo {
         getLog().info("Copying successful");
     }
 
-    private void check() throws MojoExecutionException {
+    protected void check() throws MojoExecutionException {
         if (!file.exists()) {
             final String message = "file does not exists";
             getLog().error(message);
