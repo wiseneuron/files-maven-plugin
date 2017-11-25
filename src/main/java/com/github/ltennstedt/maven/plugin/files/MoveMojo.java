@@ -38,7 +38,7 @@ public final class MoveMojo extends AbstractMojo {
      * Source file or directory
      */
     @Parameter(required = true)
-    private File from;
+    private File file;
 
     /**
      * Target directory
@@ -49,13 +49,14 @@ public final class MoveMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         check();
-        getLog().info(new StringBuilder("Copy ").append(from.getAbsolutePath()).append(" into ")
+        getLog().info(new StringBuilder("Copy ").append(file.getAbsolutePath()).append(" into ")
             .append(into.getAbsolutePath()).toString());
         try {
-            if (into.isFile()) {
-                FileUtils.moveFileToDirectory(from, into, false);
+            if (file.isFile()) {
+                FileUtils.moveFileToDirectory(file, into, false);
             } else {
-                FileUtils.moveDirectoryToDirectory(from, into, false);
+                FileUtils.deleteDirectory(into);
+                FileUtils.moveDirectory(file, into);
             }
         } catch (final IOException exception) {
             final String message = "moving failed";
@@ -66,29 +67,28 @@ public final class MoveMojo extends AbstractMojo {
     }
 
     private void check() throws MojoExecutionException {
-        if (!from.exists()) {
-            final String message = "from does not exists";
+        if (!file.exists()) {
+            final String message = "file does not exists";
             getLog().error(message);
             throw new MojoExecutionException(message);
         }
-        if (!from.canRead()) {
-            final String message = "from not readable";
+        if (!file.canRead()) {
+            final String message = "file not readable";
             getLog().error(message);
             throw new MojoExecutionException(message);
         }
         if (into.exists()) {
             if (into.isFile()) {
-                final String message = "into exists and is a file";
+                final String message = "into exists but is a file";
                 getLog().error(message);
                 throw new MojoExecutionException(message);
             }
             if (!into.canWrite()) {
-                final String message = "into not writeable";
+                final String message = "into not writable";
                 getLog().error(message);
                 throw new MojoExecutionException(message);
             }
-        }
-        if (!into.mkdirs()) {
+        } else if (!into.mkdirs()) {
             final String message = "Directories could not be created";
             getLog().error(message);
             throw new MojoExecutionException(message);
@@ -97,6 +97,6 @@ public final class MoveMojo extends AbstractMojo {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("from", from).append("into", into).toString();
+        return new ToStringBuilder(this).append("file", file).append("into", into).toString();
     }
 }
