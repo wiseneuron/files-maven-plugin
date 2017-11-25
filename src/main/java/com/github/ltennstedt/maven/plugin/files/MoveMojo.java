@@ -31,7 +31,6 @@ import org.apache.maven.plugins.annotations.Parameter;
  *
  * @author Lars Tennstedt
  * @since 1
- *
  */
 @Mojo(name = "move")
 public final class MoveMojo extends AbstractMojo {
@@ -60,7 +59,7 @@ public final class MoveMojo extends AbstractMojo {
                 FileUtils.moveDirectory(file, into);
             }
         } catch (final IOException exception) {
-            final String message = "moving failed";
+            final String message = "Moving failed";
             getLog().error(message);
             throw new MojoExecutionException(message, exception);
         }

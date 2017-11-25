@@ -12,12 +12,12 @@ What file-maven-plugin will provide:
 * Moving of files and directories
 * Deletion of files and directories
 
-What files-maven-plugin will not provide:
+What files-maven-plugin will NOT provide:
 * Complete file management
 * Renaming of files and directories
-* A replacement for Ant
+* A replacement for Ant or Gradle
 
-The files-maven-plugin is written in Java and licensed under the permissive Apache Licsense and therefore free software.
+The files-maven-plugin is written in Java, is very simplistic and does not very much.
 
 ## Implementation details
 * Java 8
@@ -46,12 +46,13 @@ files-maven-plugin is still in a very early state and a work in progress.
 This will clone the remote Git repository, build files-maven-plugin and install it into your local Maven repository.
 
 ## Developing
-
 The code formatting follows loosely the Google Java style guide found here on GitHub.    
 
 #### Why files-maven-plugin?
-I searched for a Maven plugin which was able to copy some directories and I could not simply find one.
-
+I searched for a Maven plugin which was able to copy some directories and I could not simply find one. Possible 
+solutions were the use of the Maven Antrun Plugin, Ant or Gradle but none of them made me happy because I don't want 
+to change the build automation tool or integrate a second one me into my Maven projects so I decided to start writing 
+this plugin.  
 
 #### Why AssertJ?
 I find its assertions more readable in comparison to JUnit and Hamcrest and the fluent assertions are more IDE 
@@ -65,7 +66,7 @@ friendly.
 * Please consider writing code, patches or documentation for free software projects
 * Please consider joining communities via forums, mailing lists or irc
 * Please consider donating to free software projects
-* Please show some love for your code, tests and build file 
+* Please show some love with your code, tests and build file 
 
 ## Thanks to
 * Oracle for the JVM, Java and OpenJDK

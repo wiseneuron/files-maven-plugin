@@ -31,7 +31,6 @@ import org.apache.maven.plugins.annotations.Parameter;
  *
  * @author Lars Tennstedt
  * @since 1
- *
  */
 @Mojo(name = "copy")
 public final class CopyMojo extends AbstractMojo {
@@ -60,7 +59,7 @@ public final class CopyMojo extends AbstractMojo {
                 FileUtils.copyDirectory(file, into);
             }
         } catch (final IOException exception) {
-            final String message = "copying failed";
+            final String message = "Copying failed";
             getLog().error(message);
             throw new MojoExecutionException(message, exception);
         }

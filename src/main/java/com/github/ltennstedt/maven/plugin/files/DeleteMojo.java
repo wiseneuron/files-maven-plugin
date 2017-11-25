@@ -31,7 +31,6 @@ import org.apache.maven.plugins.annotations.Parameter;
  *
  * @author Lars Tennstedt
  * @since 1
- *
  */
 @Mojo(name = "delete")
 public final class DeleteMojo extends AbstractMojo {
@@ -45,24 +44,6 @@ public final class DeleteMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         check();
         getLog().info(new StringBuilder("Delete ").append(file.getAbsolutePath()).toString());
-        delete();
-        getLog().info("Deletion successful");
-    }
-
-    private void check() throws MojoExecutionException {
-        if (!file.exists()) {
-            final String message = "delete does not exists";
-            getLog().error(message);
-            throw new MojoExecutionException(message);
-        }
-        if (!file.canWrite()) {
-            final String message = "from not writable";
-            getLog().error(message);
-            throw new MojoExecutionException(message);
-        }
-    }
-
-    private void delete() throws MojoExecutionException {
         if (file.isFile()) {
             if (!file.delete()) {
                 final String message = "Deletion failed";
@@ -77,6 +58,20 @@ public final class DeleteMojo extends AbstractMojo {
                 getLog().error(message);
                 throw new MojoExecutionException(message, exception);
             }
+        }
+        getLog().info("Deletion successful");
+    }
+
+    private void check() throws MojoExecutionException {
+        if (!file.exists()) {
+            final String message = "file does not exists";
+            getLog().error(message);
+            throw new MojoExecutionException(message);
+        }
+        if (!file.canWrite()) {
+            final String message = "from not writable";
+            getLog().error(message);
+            throw new MojoExecutionException(message);
         }
     }
 
