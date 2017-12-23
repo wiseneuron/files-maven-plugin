@@ -15,8 +15,8 @@
     limitations under the License.
 -->
 <!DOCTYPE module PUBLIC
-	"-//Puppy Crawl//DTD Check Configuration 1.3//EN"
-	"http://checkstyle.sourceforge.net/dtds/configuration_1_3.dtd">
+        "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+        "http://checkstyle.sourceforge.net/dtds/configuration_1_3.dtd">
 <module name="Checker">
     <module name="NewlineAtEndOfFile" />
     <module name="TreeWalker">
@@ -27,8 +27,8 @@
         <module name="AvoidStarImport" />
         <module name="AvoidStaticImport">
             <property name="excludes"
-                value="java.lang.System.out, java.lang.Math.*, java.util.Objects.*, 
-                com.google.common.base.Preconditions.*, org.assertj.core.api.Assertions.*, 
+                      value="java.lang.System.out, java.lang.Math.*, java.util.Objects.*,
+                com.google.check.base.Preconditions.*, org.assertj.core.api.Assertions.*,
                 org.assertj.guava.api.Assertions.*" />
         </module>
         <module name="ClassTypeParameterName" />
@@ -59,7 +59,7 @@
         </module>
         <module name="IllegalType">
             <property name="illegalClassNames"
-                value="java.util.HashSet, java.util.HashMap, java.util.LinkedHashMap, java.util.LinkedHashSet, 
+                      value="java.util.HashSet, java.util.HashMap, java.util.LinkedHashMap, java.util.LinkedHashSet,
                 java.util.TreeSet, java.util.TreeMap" />
         </module>
         <module name="InnerTypeLast" />

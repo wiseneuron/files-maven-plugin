@@ -50,7 +50,7 @@ public final class MoveMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         check();
         getLog().info(new StringBuilder("Copy ").append(file.getAbsolutePath()).append(" into ")
-            .append(into.getAbsolutePath()).toString());
+                .append(into.getAbsolutePath()).toString());
         try {
             if (file.isFile()) {
                 FileUtils.moveFileToDirectory(file, into, false);
