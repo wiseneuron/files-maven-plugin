@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CopyMojo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">files-maven-plugin</a> &gt; <a href="index.source.html" class="el_package">com.github.ltennstedt.maven.plugin.files.mojo</a> &gt; <span class="el_source">CopyMojo.java</span></div><h1>CopyMojo.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2017 Lars Tennstedt
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.github.ltennstedt.maven.plugin.files.mojo;
+
+import java.io.File;
+import java.io.IOException;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+
+/**
+ * Mojo for copying files and directories
+ *
+ * @author Lars Tennstedt
+ * @since 1
+ */
+@Mojo(name = &quot;copy&quot;)
+<span class="fc" id="L36">public final class CopyMojo extends AbstractMojo {</span>
+    /**
+     * Source file or directory
+     */
+    @Parameter(required = true)
+    File file;
+
+    /**
+     * Target directory
+     */
+    @Parameter(required = true)
+    File into;
+
+    @Override
+    public void execute() throws MojoExecutionException, MojoFailureException {
+<span class="fc" id="L51">        checkFile();</span>
+<span class="fc" id="L52">        checkInto();</span>
+<span class="fc" id="L53">        getLog().info(new StringBuilder(&quot;Copy &quot;).append(file.getAbsolutePath()).append(&quot; into &quot;)</span>
+<span class="fc" id="L54">                .append(into.getAbsolutePath()).toString());</span>
+        try {
+<span class="fc bfc" id="L56" title="All 2 branches covered.">            if (file.isFile()) {</span>
+<span class="fc" id="L57">                FileUtils.copyFileToDirectory(file, into);</span>
+            } else {
+<span class="fc" id="L59">                FileUtils.copyDirectory(file, into);</span>
+            }
+<span class="nc" id="L61">        } catch (final IOException exception) {</span>
+<span class="nc" id="L62">            final String message = &quot;Copying failed&quot;;</span>
+<span class="nc" id="L63">            getLog().error(message);</span>
+<span class="nc" id="L64">            throw new MojoExecutionException(message, exception);</span>
+<span class="fc" id="L65">        }</span>
+<span class="fc" id="L66">        getLog().info(&quot;Copying successful&quot;);</span>
+<span class="fc" id="L67">    }</span>
+
+    void checkFile() throws MojoExecutionException {
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (!file.exists()) {</span>
+<span class="fc" id="L71">            final String message = &quot;file does not exist&quot;;</span>
+<span class="fc" id="L72">            getLog().error(message);</span>
+<span class="fc" id="L73">            throw new MojoExecutionException(message);</span>
+        }
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        if (!file.canRead()) {</span>
+<span class="fc" id="L76">            final String message = &quot;file not readable&quot;;</span>
+<span class="fc" id="L77">            getLog().error(message);</span>
+<span class="fc" id="L78">            throw new MojoExecutionException(message);</span>
+        }
+<span class="fc" id="L80">    }</span>
+
+    void checkInto() throws MojoExecutionException {
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (into.exists()) {</span>
+<span class="fc bfc" id="L84" title="All 2 branches covered.">            if (into.isFile()) {</span>
+<span class="fc" id="L85">                final String message = &quot;into is a file&quot;;</span>
+<span class="fc" id="L86">                getLog().error(message);</span>
+<span class="fc" id="L87">                throw new MojoExecutionException(message);</span>
+            }
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">            if (!into.canWrite()) {</span>
+<span class="fc" id="L90">                final String message = &quot;into not writable&quot;;</span>
+<span class="fc" id="L91">                getLog().error(message);</span>
+<span class="fc" id="L92">                throw new MojoExecutionException(message);</span>
+            }
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        } else if (!into.mkdirs()) {</span>
+<span class="nc" id="L95">            final String message = &quot;Directories could not be created&quot;;</span>
+<span class="nc" id="L96">            getLog().error(message);</span>
+<span class="nc" id="L97">            throw new MojoExecutionException(message);</span>
+        }
+<span class="fc" id="L99">    }</span>
+
+    @Override
+    public String toString() {
+<span class="fc" id="L103">        return new ToStringBuilder(this).append(&quot;file&quot;, file).append(&quot;into&quot;, into).toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

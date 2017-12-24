@@ -25,7 +25,7 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2017</copyright>
     <item>
-      <title>File: 4,
+      <title>File: 6,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -46,7 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.CopyMojoTest.java">com/github/ltennstedt/maven/plugin/files/CopyMojoTest.java</a>
+                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.mojo.DeleteMojoTest.java">com/github/ltennstedt/maven/plugin/files/mojo/DeleteMojoTest.java</a>
                 </td>
                 <td>
                   0
@@ -60,7 +60,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.CopyMojo.java">com/github/ltennstedt/maven/plugin/files/CopyMojo.java</a>
+                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.mojo.CopyMojo.java">com/github/ltennstedt/maven/plugin/files/mojo/CopyMojo.java</a>
                 </td>
                 <td>
                   0
@@ -74,7 +74,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.DeleteMojo.java">com/github/ltennstedt/maven/plugin/files/DeleteMojo.java</a>
+                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.mojo.MoveMojo.java">com/github/ltennstedt/maven/plugin/files/mojo/MoveMojo.java</a>
                 </td>
                 <td>
                   0
@@ -88,7 +88,35 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.MoveMojo.java">com/github/ltennstedt/maven/plugin/files/MoveMojo.java</a>
+                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.mojo.DeleteMojo.java">com/github/ltennstedt/maven/plugin/files/mojo/DeleteMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.mojo.MoveMojoTest.java">com/github/ltennstedt/maven/plugin/files/mojo/MoveMojoTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.mojo.CopyMojoTest.java">com/github/ltennstedt/maven/plugin/files/mojo/CopyMojoTest.java</a>
                 </td>
                 <td>
                   0

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.ltennstedt.maven.plugin.files;
+package com.github.ltennstedt.maven.plugin.files.mojo;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,14 +62,14 @@ public final class DeleteMojo extends AbstractMojo {
         getLog().info("Deletion successful");
     }
 
-    private void check() throws MojoExecutionException {
+    void check() throws MojoExecutionException {
         if (!file.exists()) {
-            final String message = "file does not exists";
+            final String message = "file does not exist";
             getLog().error(message);
             throw new MojoExecutionException(message);
         }
         if (!file.canWrite()) {
-            final String message = "from not writable";
+            final String message = "file not writable";
             getLog().error(message);
             throw new MojoExecutionException(message);
         }

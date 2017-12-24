@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.ltennstedt.maven.plugin.files;
+package com.github.ltennstedt.maven.plugin.files.mojo;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,14 +48,14 @@ public final class CopyMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        check();
+        checkFile();
+        checkInto();
         getLog().info(new StringBuilder("Copy ").append(file.getAbsolutePath()).append(" into ")
                 .append(into.getAbsolutePath()).toString());
         try {
             if (file.isFile()) {
                 FileUtils.copyFileToDirectory(file, into);
             } else {
-                FileUtils.deleteDirectory(into);
                 FileUtils.copyDirectory(file, into);
             }
         } catch (final IOException exception) {
@@ -66,9 +66,9 @@ public final class CopyMojo extends AbstractMojo {
         getLog().info("Copying successful");
     }
 
-    protected void check() throws MojoExecutionException {
+    void checkFile() throws MojoExecutionException {
         if (!file.exists()) {
-            final String message = "file does not exists";
+            final String message = "file does not exist";
             getLog().error(message);
             throw new MojoExecutionException(message);
         }
@@ -77,9 +77,12 @@ public final class CopyMojo extends AbstractMojo {
             getLog().error(message);
             throw new MojoExecutionException(message);
         }
+    }
+
+    void checkInto() throws MojoExecutionException {
         if (into.exists()) {
             if (into.isFile()) {
-                final String message = "into exists but is a file";
+                final String message = "into is a file";
                 getLog().error(message);
                 throw new MojoExecutionException(message);
             }
