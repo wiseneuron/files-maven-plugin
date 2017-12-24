@@ -63,9 +63,9 @@ files-maven-plugin is still in a very early state and a work in progress.
                     </configuration>
                 </execution>
                 <execution>
-                    <id>copy</id>
+                    <id>delete</id>
                     <goals>
-                        <goal>copy</goal>
+                        <goal>delete</goal>
                     </goals>
                     <configuration>
                         <file>file</file>
