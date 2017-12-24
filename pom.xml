@@ -333,7 +333,7 @@
         </plugins>
     </reporting>
     <name>files-maven-plugin</name>
-    <description>A Maven plugin for copying, moving and deleting files and directories</description>
+    <description>Maven plugin for copying, moving and deleting files and directories</description>
     <url>https://github.com/ltennstedt/files-maven-plugin</url>
     <inceptionYear>2017</inceptionYear>
     <licenses>

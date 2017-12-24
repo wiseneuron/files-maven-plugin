@@ -1,5 +1,5 @@
 # files-maven-plugin
-A Maven plugin for copying, moving and deleting files and directories
+Maven plugin for copying, moving and deleting files and directories
 
 [![Build Status](https://travis-ci.org/ltennstedt/files-maven-plugin.svg?branch=master)](https://travis-ci.org/ltennstedt/files-maven-plugin)
 [![codecov](https://codecov.io/gh/ltennstedt/files-maven-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/ltennstedt/files-maven-plugin)
@@ -16,6 +16,7 @@ What files-maven-plugin will NOT provide:
 * Complete file management
 * Renaming of files and directories
 * A replacement for Ant or Gradle
+* A replacement for the Maven Antrun, Maven Clean or Maven Resources Plugin
 
 The files-maven-plugin is written in Java, is very simplistic and does not very much.
 
@@ -31,6 +32,51 @@ The files-maven-plugin is written in Java, is very simplistic and does not very 
 files-maven-plugin is open source and free software and is licensed under the permissive Apache License.
 
 files-maven-plugin is still in a very early state and a work in progress.
+
+## Usage
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupdId>com.github.ltennstedt</groupId>
+            <artifactId>files-maven-plugin</artifactId>
+            <version>1-SNAPSHOT</version>
+            <executions>
+                <execution>
+                    <id>copy</id>
+                    <goals>
+                        <goal>copy</goal>
+                    </goals>
+                    <configuration>
+                        <file>file</file>
+                        <into>into</into>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>move</id>
+                    <goals>
+                        <goal>move</goal>
+                    </goals>
+                    <configuration>
+                        <file>file</file>
+                        <into>into</into>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>copy</id>
+                    <goals>
+                        <goal>copy</goal>
+                    </goals>
+                    <configuration>
+                        <file>file</file>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+
+```
 
 ## Building
 
@@ -52,7 +98,7 @@ The code formatting follows loosely the Google Java style guide found here on Gi
 I searched for a Maven plugin which was able to copy some directories and I could not simply find one. Possible 
 solutions were the use of the Maven Antrun Plugin, Ant or Gradle but none of them made me happy because I don't want 
 to change the build automation tool or integrate a second one me into my Maven projects so I decided to start writing 
-this plugin.  
+this plugin.
 
 #### Why AssertJ?
 I find its assertions more readable in comparison to JUnit and Hamcrest and the fluent assertions are more IDE 
@@ -70,7 +116,7 @@ friendly.
 
 ## Thanks to
 * Oracle for the JVM, Java and OpenJDK
-* the Eclipse Foundation for the Eclipse IDE
+* JetBrains for IntelliJ IDEA Community Edition
 * Google for Error Prone
 * the Apache Software Foundation for Maven, Commons Lang, Commons IO and the Apache License
 * Joel Costigliola for AssertJ

@@ -74,8 +74,8 @@ public final class MoveMojo extends AbstractMojo {
             getLog().error(message);
             throw new MojoExecutionException(message);
         }
-        if (!file.canRead()) {
-            final String message = "file not readable";
+        if (!file.canWrite()) {
+            final String message = "file not writable";
             getLog().error(message);
             throw new MojoExecutionException(message);
         }
