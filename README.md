@@ -40,7 +40,7 @@ files-maven-plugin is still in a very early state and a work in progress.
         <plugin>
             <groupdId>com.github.ltennstedt</groupId>
             <artifactId>files-maven-plugin</artifactId>
-            <version>1-SNAPSHOT</version>
+            <version>1</version>
             <executions>
                 <execution>
                     <id>copy</id>
