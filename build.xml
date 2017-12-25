@@ -26,4 +26,14 @@
             <fileset dir="target/site/" />
         </copy>
     </target>
+    <target name="deploy">
+        <copy toFile=".travis.yml" overwrite="true">
+            <fileset file="config/travis/.travis-deploy.yml" />
+        </copy>
+    </target>
+    <target name="dev">
+        <copy toDir="." overwrite="true">
+            <fileset file="config/travis/.travis.yml" />
+        </copy>
+    </target>
 </project>
