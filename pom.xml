@@ -369,4 +369,11 @@
     <prerequisites>
         <maven>3.5</maven>
     </prerequisites>
+    <distributionManagement>
+        <repository>
+            <id>bintray-ltennstedt-Maven</id>
+            <name>ltennstedt-Maven</name>
+            <url>https://api.bintray.com/maven/ltennstedt/Maven/files-maven-plugin/;publish=1</url>
+        </repository>
+    </distributionManagement>
 </project>

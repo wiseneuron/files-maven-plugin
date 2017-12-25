@@ -74,8 +74,8 @@ import org.apache.maven.plugins.annotations.Parameter;
 <span class="fc" id="L74">            getLog().error(message);</span>
 <span class="fc" id="L75">            throw new MojoExecutionException(message);</span>
         }
-<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (!file.canRead()) {</span>
-<span class="fc" id="L78">            final String message = &quot;file not readable&quot;;</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if (!file.canWrite()) {</span>
+<span class="fc" id="L78">            final String message = &quot;file not writable&quot;;</span>
 <span class="fc" id="L79">            getLog().error(message);</span>
 <span class="fc" id="L80">            throw new MojoExecutionException(message);</span>
         }
