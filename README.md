@@ -34,6 +34,30 @@ files-maven-plugin is open source and free software and is licensed under the pe
 files-maven-plugin is still in a very early state and a work in progress.
 
 ## Usage
+
+settings.xml
+```xml
+<profiles>
+    <profile>
+        <id>bintray</id>
+        <pluginRepositories>
+            <pluginRepository>
+                <id>bintray-ltennstedt-Maven</id>
+                <snapshots>
+                    <enabled>false</enabled>
+                </snapshots>
+                <name>bintray-plugins</name>
+                <url>https://dl.bintray.com/ltennstedt/Maven</url>
+            </pluginRepository>
+        </pluginRepositories>
+    </profile>
+</profiles>
+<activeProfiles>
+    <activeProfile>bintray</activeProfile>
+</activeProfiles>
+```
+
+pom.xml
 ```xml
 <build>
     <plugins>
