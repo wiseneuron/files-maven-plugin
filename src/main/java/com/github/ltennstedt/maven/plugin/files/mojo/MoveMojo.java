@@ -16,6 +16,7 @@
 
 package com.github.ltennstedt.maven.plugin.files.mojo;
 
+import com.github.ltennstedt.maven.plugin.files.util.Preconditions;
 import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
@@ -38,18 +39,18 @@ public final class MoveMojo extends AbstractMojo {
      * Source file or directory
      */
     @Parameter(required = true)
-    File file;
+    private File file;
 
     /**
      * Target directory
      */
     @Parameter(required = true)
-    File into;
+    private File into;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        checkFile();
-        checkInto();
+        Preconditions.checkFile(file, getLog());
+        Preconditions.checkInto(into, getLog());
         getLog().info(new StringBuilder("Move ").append(file.getAbsolutePath()).append(" into ")
                 .append(into.getAbsolutePath()).toString());
         try {
@@ -68,40 +69,24 @@ public final class MoveMojo extends AbstractMojo {
         getLog().info("Moving successful");
     }
 
-    void checkFile() throws MojoExecutionException {
-        if (!file.exists()) {
-            final String message = "file does not exist";
-            getLog().error(message);
-            throw new MojoExecutionException(message);
-        }
-        if (!file.canWrite()) {
-            final String message = "file not writable";
-            getLog().error(message);
-            throw new MojoExecutionException(message);
-        }
-    }
-
-    void checkInto() throws MojoExecutionException {
-        if (into.exists()) {
-            if (into.isFile()) {
-                final String message = "into is a file";
-                getLog().error(message);
-                throw new MojoExecutionException(message);
-            }
-            if (!into.canWrite()) {
-                final String message = "into not writable";
-                getLog().error(message);
-                throw new MojoExecutionException(message);
-            }
-        } else if (!into.mkdirs()) {
-            final String message = "Directories could not be created";
-            getLog().error(message);
-            throw new MojoExecutionException(message);
-        }
-    }
-
     @Override
     public String toString() {
         return new ToStringBuilder(this).append("file", file).append("into", into).toString();
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(final File file) {
+        this.file = file;
+    }
+
+    public File getInto() {
+        return into;
+    }
+
+    public void setInto(final File into) {
+        this.into = into;
     }
 }

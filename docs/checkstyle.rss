@@ -25,7 +25,7 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2017</copyright>
     <item>
-      <title>File: 6,
+      <title>File: 8,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -74,6 +74,20 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.util.PreconditionsTest.java">com/github/ltennstedt/maven/plugin/files/util/PreconditionsTest.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.mojo.MoveMojo.java">com/github/ltennstedt/maven/plugin/files/mojo/MoveMojo.java</a>
                 </td>
                 <td>
@@ -89,6 +103,20 @@ under the License.
                           <tr>
                 <td>
                   <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.mojo.DeleteMojo.java">com/github/ltennstedt/maven/plugin/files/mojo/DeleteMojo.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.util.Preconditions.java">com/github/ltennstedt/maven/plugin/files/util/Preconditions.java</a>
                 </td>
                 <td>
                   0

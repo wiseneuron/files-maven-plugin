@@ -17,7 +17,6 @@
 package com.github.ltennstedt.maven.plugin.files.mojo;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,7 +38,6 @@ public final class CopyMojoTest {
     public static void setUpClass() throws IOException {
         testarea.mkdir();
         FileUtils.copyDirectoryToDirectory(new File("src/test/resources/copy"), testarea);
-        FileUtils.copyDirectoryToDirectory(new File("src/test/resources/check"), testarea);
     }
 
     @Before
@@ -50,8 +48,8 @@ public final class CopyMojoTest {
     @Test
     public void executeFileShouldSucceed() throws MojoFailureException, MojoExecutionException {
         final File file = new File("testarea/copy/fileToCopy.txt");
-        mojo.file = file;
-        mojo.into = new File("testarea/into");
+        mojo.setFile(file);
+        mojo.setInto(new File("testarea/into"));
         mojo.execute();
         assertThat(new File("testarea/into/fileToCopy.txt")).isFile().hasSameContentAs(file);
     }
@@ -59,8 +57,8 @@ public final class CopyMojoTest {
     @Test
     public void executeDirShouldSucceed() throws MojoFailureException, MojoExecutionException {
         final File file = new File("testarea/copy/dirToCopy");
-        mojo.file = file;
-        mojo.into = new File("testarea/into");
+        mojo.setFile(file);
+        mojo.setInto(new File("testarea/into"));
         mojo.execute();
         assertThat(new File("testarea/into")).isDirectory();
         assertThat(new File("testarea/into/subdir/file.txt"))
@@ -72,44 +70,12 @@ public final class CopyMojoTest {
     }
 
     @Test
-    public void checkFileDoesNotExistShouldThrowException() {
-        mojo.file = (new File("nonExistingFile"));
-        assertThatThrownBy(() -> mojo.checkFile()).isExactlyInstanceOf(MojoExecutionException.class)
-                .hasMessage("file does not exist");
-    }
-
-    @Test
-    public void checkFileNotReadableShouldThrowException() {
-        final File file = new File("testarea/check/notReadableFile.txt");
-        file.setReadable(false);
-        mojo.file = file;
-        assertThatThrownBy(() -> mojo.checkFile()).isExactlyInstanceOf(MojoExecutionException.class)
-                .hasMessage("file not readable");
-    }
-
-    @Test
-    public void checkIntoIsDirShouldThrowException() {
-        mojo.into = new File("testarea/check/intoFile.txt");
-        assertThatThrownBy(() -> mojo.checkInto()).isExactlyInstanceOf(MojoExecutionException.class)
-                .hasMessage("into is a file");
-    }
-
-    @Test
-    public void checkIntoNotWrtitableShouldThrowException() {
-        final File into = new File("testarea/check/notWritableDir");
-        into.setWritable(false);
-        mojo.into = into;
-        assertThatThrownBy(() -> mojo.checkInto()).isExactlyInstanceOf(MojoExecutionException.class)
-                .hasMessage("into not writable");
-    }
-
-    @Test
     public void toStringShouldSucceed() {
         final File file = new File("testarea/copy/fileToCopy.txt");
-        mojo.file = file;
-        mojo.into = new File("testarea/into");
-        assertThat(mojo.toString())
-                .isEqualTo(new ToStringBuilder(mojo).append("file", mojo.file).append("into", mojo.into).toString());
+        mojo.setFile(file);
+        mojo.setInto(new File("testarea/into"));
+        assertThat(mojo.toString()).isEqualTo(
+                new ToStringBuilder(mojo).append("file", mojo.getFile()).append("into", mojo.getInto()).toString());
     }
 
     @After
@@ -119,7 +85,6 @@ public final class CopyMojoTest {
 
     @AfterClass
     public static void cleanUpClass() throws IOException {
-        new File("testarea/check/notWritableDir").setWritable(true);
         FileUtils.deleteDirectory(testarea);
     }
 }

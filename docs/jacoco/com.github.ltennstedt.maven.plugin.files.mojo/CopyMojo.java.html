@@ -16,6 +16,7 @@
 
 package com.github.ltennstedt.maven.plugin.files.mojo;
 
+import com.github.ltennstedt.maven.plugin.files.util.Preconditions;
 import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
@@ -33,74 +34,58 @@ import org.apache.maven.plugins.annotations.Parameter;
  * @since 1
  */
 @Mojo(name = &quot;copy&quot;)
-<span class="fc" id="L36">public final class CopyMojo extends AbstractMojo {</span>
+<span class="fc" id="L37">public final class CopyMojo extends AbstractMojo {</span>
     /**
      * Source file or directory
      */
     @Parameter(required = true)
-    File file;
+    private File file;
 
     /**
      * Target directory
      */
     @Parameter(required = true)
-    File into;
+    private File into;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-<span class="fc" id="L51">        checkFile();</span>
-<span class="fc" id="L52">        checkInto();</span>
-<span class="fc" id="L53">        getLog().info(new StringBuilder(&quot;Copy &quot;).append(file.getAbsolutePath()).append(&quot; into &quot;)</span>
-<span class="fc" id="L54">                .append(into.getAbsolutePath()).toString());</span>
+<span class="fc" id="L52">        Preconditions.checkFile(file, getLog());</span>
+<span class="fc" id="L53">        Preconditions.checkInto(into, getLog());</span>
+<span class="fc" id="L54">        getLog().info(new StringBuilder(&quot;Copy &quot;).append(file.getAbsolutePath()).append(&quot; into &quot;)</span>
+<span class="fc" id="L55">                .append(into.getAbsolutePath()).toString());</span>
         try {
-<span class="fc bfc" id="L56" title="All 2 branches covered.">            if (file.isFile()) {</span>
-<span class="fc" id="L57">                FileUtils.copyFileToDirectory(file, into);</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">            if (file.isFile()) {</span>
+<span class="fc" id="L58">                FileUtils.copyFileToDirectory(file, into);</span>
             } else {
-<span class="fc" id="L59">                FileUtils.copyDirectory(file, into);</span>
+<span class="fc" id="L60">                FileUtils.copyDirectory(file, into);</span>
             }
-<span class="nc" id="L61">        } catch (final IOException exception) {</span>
-<span class="nc" id="L62">            final String message = &quot;Copying failed&quot;;</span>
-<span class="nc" id="L63">            getLog().error(message);</span>
-<span class="nc" id="L64">            throw new MojoExecutionException(message, exception);</span>
-<span class="fc" id="L65">        }</span>
-<span class="fc" id="L66">        getLog().info(&quot;Copying successful&quot;);</span>
-<span class="fc" id="L67">    }</span>
-
-    void checkFile() throws MojoExecutionException {
-<span class="fc bfc" id="L70" title="All 2 branches covered.">        if (!file.exists()) {</span>
-<span class="fc" id="L71">            final String message = &quot;file does not exist&quot;;</span>
-<span class="fc" id="L72">            getLog().error(message);</span>
-<span class="fc" id="L73">            throw new MojoExecutionException(message);</span>
-        }
-<span class="fc bfc" id="L75" title="All 2 branches covered.">        if (!file.canRead()) {</span>
-<span class="fc" id="L76">            final String message = &quot;file not readable&quot;;</span>
-<span class="fc" id="L77">            getLog().error(message);</span>
-<span class="fc" id="L78">            throw new MojoExecutionException(message);</span>
-        }
-<span class="fc" id="L80">    }</span>
-
-    void checkInto() throws MojoExecutionException {
-<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (into.exists()) {</span>
-<span class="fc bfc" id="L84" title="All 2 branches covered.">            if (into.isFile()) {</span>
-<span class="fc" id="L85">                final String message = &quot;into is a file&quot;;</span>
-<span class="fc" id="L86">                getLog().error(message);</span>
-<span class="fc" id="L87">                throw new MojoExecutionException(message);</span>
-            }
-<span class="pc bpc" id="L89" title="1 of 2 branches missed.">            if (!into.canWrite()) {</span>
-<span class="fc" id="L90">                final String message = &quot;into not writable&quot;;</span>
-<span class="fc" id="L91">                getLog().error(message);</span>
-<span class="fc" id="L92">                throw new MojoExecutionException(message);</span>
-            }
-<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        } else if (!into.mkdirs()) {</span>
-<span class="nc" id="L95">            final String message = &quot;Directories could not be created&quot;;</span>
-<span class="nc" id="L96">            getLog().error(message);</span>
-<span class="nc" id="L97">            throw new MojoExecutionException(message);</span>
-        }
-<span class="fc" id="L99">    }</span>
+<span class="nc" id="L62">        } catch (final IOException exception) {</span>
+<span class="nc" id="L63">            final String message = &quot;Copying failed&quot;;</span>
+<span class="nc" id="L64">            getLog().error(message);</span>
+<span class="nc" id="L65">            throw new MojoExecutionException(message, exception);</span>
+<span class="fc" id="L66">        }</span>
+<span class="fc" id="L67">        getLog().info(&quot;Copying successful&quot;);</span>
+<span class="fc" id="L68">    }</span>
 
     @Override
     public String toString() {
-<span class="fc" id="L103">        return new ToStringBuilder(this).append(&quot;file&quot;, file).append(&quot;into&quot;, into).toString();</span>
+<span class="fc" id="L72">        return new ToStringBuilder(this).append(&quot;file&quot;, file).append(&quot;into&quot;, into).toString();</span>
     }
+
+    public File getFile() {
+<span class="fc" id="L76">        return file;</span>
+    }
+
+    public void setFile(final File file) {
+<span class="fc" id="L80">        this.file = file;</span>
+<span class="fc" id="L81">    }</span>
+
+    public File getInto() {
+<span class="fc" id="L84">        return into;</span>
+    }
+
+    public void setInto(final File into) {
+<span class="fc" id="L88">        this.into = into;</span>
+<span class="fc" id="L89">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>
