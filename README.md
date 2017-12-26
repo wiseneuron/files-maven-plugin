@@ -42,12 +42,12 @@ settings.xml
         <id>bintray</id>
         <pluginRepositories>
             <pluginRepository>
-                <id>bintray-ltennstedt-Maven</id>
+                <id>bintray-ltennstedt-maven</id>
                 <snapshots>
                     <enabled>false</enabled>
                 </snapshots>
                 <name>bintray-plugins</name>
-                <url>https://dl.bintray.com/ltennstedt/Maven</url>
+                <url>https://dl.bintray.com/ltennstedt/maven</url>
             </pluginRepository>
         </pluginRepositories>
     </profile>
