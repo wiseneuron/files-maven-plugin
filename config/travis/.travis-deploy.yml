@@ -15,6 +15,10 @@
 #
 
 language: java
+after_script:
+    - mvn install site
+    - ant
+    - ant deleteDocs
 deploy:
   provider: script
   script: "cp config/maven/settings.xml $HOME/.m2/settings.xml && mvn deploy"
