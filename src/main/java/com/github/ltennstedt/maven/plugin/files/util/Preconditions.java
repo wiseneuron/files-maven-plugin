@@ -49,10 +49,6 @@ public final class Preconditions {
                 log.error(message);
                 throw new MojoExecutionException(message);
             }
-        } else if (!into.mkdirs()) {
-            final String message = "Directories could not be created";
-            log.error(message);
-            throw new MojoExecutionException(message);
         }
     }
 }
