@@ -31,8 +31,6 @@ The files-maven-plugin is written in Java, is very simplistic and does not very 
 
 files-maven-plugin is open source and free software and is licensed under the permissive Apache License.
 
-files-maven-plugin is still in a very early state and a work in progress.
-
 ## Usage
 
 settings.xml
@@ -120,9 +118,9 @@ The code formatting follows loosely the Google Java style guide found here on Gi
 
 #### Why files-maven-plugin?
 I searched for a Maven plugin which was able to copy some directories and I could not simply find one. Possible 
-solutions were the use of the Maven Antrun Plugin, Ant or Gradle but none of them made me happy because I don't want 
-to change the build automation tool or integrate a second one me into my Maven projects so I decided to start writing 
-this plugin.
+solutions were the use of the Maven Antrun Plugin, the combination of the Maven Clean and Maven Resources Plugin, 
+Ant or Gradle but none of them made me happy because I don't want to change the build automation tool or 
+integrate a second one into my Maven projects so I decided to start writing this plugin.
 
 #### Why AssertJ?
 I find its assertions more readable in comparison to JUnit and Hamcrest and the fluent assertions are more IDE 
