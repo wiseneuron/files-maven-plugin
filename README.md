@@ -4,7 +4,7 @@ Maven plugin for copying, moving and deleting files and directories
 [![Build Status](https://travis-ci.org/ltennstedt/files-maven-plugin.svg?branch=master)](https://travis-ci.org/ltennstedt/files-maven-plugin)
 [![codecov](https://codecov.io/gh/ltennstedt/files-maven-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/ltennstedt/files-maven-plugin)
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](http://shields.io)
-
+[![JCenter](https://img.shields.io/badge/jcenter-2-green.svg)](http://shields.io)
 The files-maven-plugin is a Maven plugin which copies, moves or deletes files and directories.
 
 What file-maven-plugin will provide:
@@ -40,12 +40,12 @@ settings.xml
         <id>bintray</id>
         <pluginRepositories>
             <pluginRepository>
-                <id>bintray-ltennstedt-maven</id>
+                <id>central</id>
                 <snapshots>
                     <enabled>false</enabled>
                 </snapshots>
                 <name>bintray-plugins</name>
-                <url>https://dl.bintray.com/ltennstedt/maven</url>
+                <url>https://jcenter.bintray.com</url>
             </pluginRepository>
         </pluginRepositories>
     </profile>
@@ -62,7 +62,7 @@ pom.xml
         <plugin>
             <groupdId>com.github.ltennstedt</groupId>
             <artifactId>files-maven-plugin</artifactId>
-            <version>1</version>
+            <version>2</version>
             <executions>
                 <execution>
                     <id>copy</id>
