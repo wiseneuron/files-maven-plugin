@@ -5,6 +5,7 @@ Maven plugin for copying, moving and deleting files and directories
 [![codecov](https://codecov.io/gh/ltennstedt/files-maven-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/ltennstedt/files-maven-plugin)
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](http://shields.io)
 [![JCenter](https://img.shields.io/badge/jcenter-2-green.svg)](http://shields.io)
+
 The files-maven-plugin is a Maven plugin which copies, moves or deletes files and directories.
 
 What file-maven-plugin will provide:
