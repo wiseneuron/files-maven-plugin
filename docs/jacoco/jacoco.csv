@@ -1,5 +1,5 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 files-maven-plugin,com.github.ltennstedt.maven.plugin.files.util,Preconditions,3,57,1,9,2,19,2,6,1,2
 files-maven-plugin,com.github.ltennstedt.maven.plugin.files.mojo,CopyMojo,13,80,0,2,4,18,0,8,0,7
-files-maven-plugin,com.github.ltennstedt.maven.plugin.files.mojo,DeleteMojo,24,75,1,7,7,19,1,7,0,4
+files-maven-plugin,com.github.ltennstedt.maven.plugin.files.mojo,DeleteMojo,24,82,1,7,7,22,1,9,0,6
 files-maven-plugin,com.github.ltennstedt.maven.plugin.files.mojo,MoveMojo,13,87,0,2,4,20,0,8,0,7

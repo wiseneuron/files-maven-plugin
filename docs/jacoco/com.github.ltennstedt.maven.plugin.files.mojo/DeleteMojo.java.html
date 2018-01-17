@@ -38,7 +38,7 @@ import org.apache.maven.plugins.annotations.Parameter;
      * File or directory which will be deleted
      */
     @Parameter(required = true)
-    File file;
+    private File file;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -79,5 +79,13 @@ import org.apache.maven.plugins.annotations.Parameter;
     public String toString() {
 <span class="fc" id="L80">        return new ToStringBuilder(this).append(&quot;file&quot;, file).toString();</span>
     }
+
+    public File getFile() {
+<span class="fc" id="L84">        return file;</span>
+    }
+
+    public void setFile(final File file) {
+<span class="fc" id="L88">        this.file = file;</span>
+<span class="fc" id="L89">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

@@ -38,7 +38,7 @@ public final class DeleteMojo extends AbstractMojo {
      * File or directory which will be deleted
      */
     @Parameter(required = true)
-    File file;
+    private File file;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -78,5 +78,13 @@ public final class DeleteMojo extends AbstractMojo {
     @Override
     public String toString() {
         return new ToStringBuilder(this).append("file", file).toString();
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(final File file) {
+        this.file = file;
     }
 }

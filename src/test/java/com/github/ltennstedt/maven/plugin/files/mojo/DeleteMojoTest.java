@@ -49,7 +49,7 @@ public final class DeleteMojoTest {
     @Test
     public void executeFileShouldSucceed() throws MojoFailureException, MojoExecutionException {
         final File file = new File("testarea/delete/fileToDelete.txt");
-        mojo.file = file;
+        mojo.setFile(file);
         mojo.execute();
         assertThat(file).doesNotExist();
     }
@@ -57,14 +57,14 @@ public final class DeleteMojoTest {
     @Test
     public void executeDirShouldSucceed() throws MojoFailureException, MojoExecutionException {
         final File file = new File("testarea/delete/dirToDelete");
-        mojo.file = file;
+        mojo.setFile(file);
         mojo.execute();
         assertThat(file).doesNotExist();
     }
 
     @Test
     public void checkFileDoesNotExistShouldThrowException() {
-        mojo.file = (new File("nonExistingFile"));
+        mojo.setFile(new File("nonExistingFile"));
         assertThatThrownBy(() -> mojo.check()).isExactlyInstanceOf(MojoExecutionException.class)
                 .hasMessage("file does not exist");
     }
@@ -73,7 +73,7 @@ public final class DeleteMojoTest {
     public void checkFileNotReadableShouldThrowException() {
         final File file = new File("testarea/check/notReadableFile.txt");
         file.setWritable(false);
-        mojo.file = file;
+        mojo.setFile(file);
         assertThatThrownBy(() -> mojo.check()).isExactlyInstanceOf(MojoExecutionException.class)
                 .hasMessage("file not writable");
     }
@@ -81,8 +81,8 @@ public final class DeleteMojoTest {
     @Test
     public void toStringShouldSucceed() {
         final File file = new File("testarea/delete/fileToDelete.txt");
-        mojo.file = file;
-        assertThat(mojo.toString()).isEqualTo(new ToStringBuilder(mojo).append("file", mojo.file).toString());
+        mojo.setFile(file);
+        assertThat(mojo.toString()).isEqualTo(new ToStringBuilder(mojo).append("file", mojo.getFile()).toString());
     }
 
     @AfterClass
