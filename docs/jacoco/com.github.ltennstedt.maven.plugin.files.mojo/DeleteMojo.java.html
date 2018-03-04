@@ -67,25 +67,24 @@ import org.apache.maven.plugins.annotations.Parameter;
 <span class="fc" id="L67">            final String message = &quot;file does not exist&quot;;</span>
 <span class="fc" id="L68">            getLog().error(message);</span>
 <span class="fc" id="L69">            throw new MojoExecutionException(message);</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">        } else if (!file.canWrite()) {</span>
+<span class="fc" id="L71">            final String message = &quot;file not writable&quot;;</span>
+<span class="fc" id="L72">            getLog().error(message);</span>
+<span class="fc" id="L73">            throw new MojoExecutionException(message);</span>
         }
-<span class="fc bfc" id="L71" title="All 2 branches covered.">        if (!file.canWrite()) {</span>
-<span class="fc" id="L72">            final String message = &quot;file not writable&quot;;</span>
-<span class="fc" id="L73">            getLog().error(message);</span>
-<span class="fc" id="L74">            throw new MojoExecutionException(message);</span>
-        }
-<span class="fc" id="L76">    }</span>
+<span class="fc" id="L75">    }</span>
 
     @Override
     public String toString() {
-<span class="fc" id="L80">        return new ToStringBuilder(this).append(&quot;file&quot;, file).toString();</span>
+<span class="fc" id="L79">        return new ToStringBuilder(this).append(&quot;file&quot;, file).toString();</span>
     }
 
     public File getFile() {
-<span class="fc" id="L84">        return file;</span>
+<span class="fc" id="L83">        return file;</span>
     }
 
     public void setFile(final File file) {
-<span class="fc" id="L88">        this.file = file;</span>
-<span class="fc" id="L89">    }</span>
+<span class="fc" id="L87">        this.file = file;</span>
+<span class="fc" id="L88">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

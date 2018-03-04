@@ -67,8 +67,7 @@ public final class DeleteMojo extends AbstractMojo {
             final String message = "file does not exist";
             getLog().error(message);
             throw new MojoExecutionException(message);
-        }
-        if (!file.canWrite()) {
+        } else if (!file.canWrite()) {
             final String message = "file not writable";
             getLog().error(message);
             throw new MojoExecutionException(message);

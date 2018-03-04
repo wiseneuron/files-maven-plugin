@@ -52,7 +52,7 @@ public final class CopyMojo extends AbstractMojo {
         Preconditions.checkFile(file, getLog());
         Preconditions.checkInto(into, getLog());
         getLog().info(new StringBuilder("Copy ").append(file.getAbsolutePath()).append(" into ")
-                .append(into.getAbsolutePath()).toString());
+            .append(into.getAbsolutePath()).toString());
         try {
             if (file.isFile()) {
                 FileUtils.copyFileToDirectory(file, into);

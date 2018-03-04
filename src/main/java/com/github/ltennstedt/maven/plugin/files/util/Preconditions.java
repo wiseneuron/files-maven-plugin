@@ -29,8 +29,7 @@ public final class Preconditions {
             final String message = "file does not exist";
             log.error(message);
             throw new MojoExecutionException(message);
-        }
-        if (!file.canRead()) {
+        } else if (!file.canRead()) {
             final String message = "file not readable";
             log.error(message);
             throw new MojoExecutionException(message);

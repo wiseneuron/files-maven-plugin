@@ -41,7 +41,7 @@ public class PreconditionsTest {
     public void checkFileDoesNotExistShouldThrowException() {
         mojo.setFile(new File("nonExistingFile"));
         assertThatThrownBy(() -> Preconditions.checkFile(mojo.getFile(), mojo.getLog()))
-                .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("file does not exist");
+            .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("file does not exist");
     }
 
     @Test
@@ -50,14 +50,14 @@ public class PreconditionsTest {
         file.setReadable(false);
         mojo.setFile(file);
         assertThatThrownBy(() -> Preconditions.checkFile(mojo.getFile(), mojo.getLog()))
-                .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("file not readable");
+            .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("file not readable");
     }
 
     @Test
     public void checkIntoIsFileShouldThrowException() {
         mojo.setInto(new File("testarea/check/intoFile.txt"));
         assertThatThrownBy(() -> Preconditions.checkInto(mojo.getInto(), mojo.getLog()))
-                .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("into is a file");
+            .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("into is a file");
     }
 
     @Test
@@ -66,7 +66,7 @@ public class PreconditionsTest {
         into.setWritable(false);
         mojo.setInto(into);
         assertThatThrownBy(() -> Preconditions.checkInto(mojo.getInto(), mojo.getLog()))
-                .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("into not writable");
+            .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("into not writable");
     }
 
     @AfterClass

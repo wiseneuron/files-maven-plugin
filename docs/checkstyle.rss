@@ -25,7 +25,7 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2017 - 2018</copyright>
     <item>
-      <title>File: 8,
+      <title>File: 0,
              Errors: 0,
              Warnings: 0,
              Infos: 0
@@ -44,118 +44,6 @@ under the License.
             </tr>
           </thead>
           <tbody>
-                          <tr>
-                <td>
-                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.mojo.DeleteMojoTest.java">com/github/ltennstedt/maven/plugin/files/mojo/DeleteMojoTest.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.mojo.CopyMojo.java">com/github/ltennstedt/maven/plugin/files/mojo/CopyMojo.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.util.PreconditionsTest.java">com/github/ltennstedt/maven/plugin/files/util/PreconditionsTest.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.mojo.MoveMojo.java">com/github/ltennstedt/maven/plugin/files/mojo/MoveMojo.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.mojo.DeleteMojo.java">com/github/ltennstedt/maven/plugin/files/mojo/DeleteMojo.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.util.Preconditions.java">com/github/ltennstedt/maven/plugin/files/util/Preconditions.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.mojo.MoveMojoTest.java">com/github/ltennstedt/maven/plugin/files/mojo/MoveMojoTest.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/ltennstedt/files-maven-plugin/checkstyle.html#com.github.ltennstedt.maven.plugin.files.mojo.CopyMojoTest.java">com/github/ltennstedt/maven/plugin/files/mojo/CopyMojoTest.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
                       </tbody>
         </table>
         

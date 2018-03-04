@@ -52,7 +52,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 <span class="fc" id="L52">        Preconditions.checkFile(file, getLog());</span>
 <span class="fc" id="L53">        Preconditions.checkInto(into, getLog());</span>
 <span class="fc" id="L54">        getLog().info(new StringBuilder(&quot;Copy &quot;).append(file.getAbsolutePath()).append(&quot; into &quot;)</span>
-<span class="fc" id="L55">                .append(into.getAbsolutePath()).toString());</span>
+<span class="fc" id="L55">            .append(into.getAbsolutePath()).toString());</span>
         try {
 <span class="fc bfc" id="L57" title="All 2 branches covered.">            if (file.isFile()) {</span>
 <span class="fc" id="L58">                FileUtils.copyFileToDirectory(file, into);</span>
@@ -88,4 +88,4 @@ import org.apache.maven.plugins.annotations.Parameter;
 <span class="fc" id="L88">        this.into = into;</span>
 <span class="fc" id="L89">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
