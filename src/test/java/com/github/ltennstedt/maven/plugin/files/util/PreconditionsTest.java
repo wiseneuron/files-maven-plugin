@@ -22,6 +22,7 @@ import com.github.ltennstedt.maven.plugin.files.mojo.CopyMojo;
 import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -38,6 +39,18 @@ public class PreconditionsTest {
     }
 
     @Test
+    public void checkFileFileIsNullShouldThrowException() {
+        assertThatThrownBy(() -> Preconditions.checkFile(null, mojo.getLog()))
+            .isExactlyInstanceOf(NullPointerException.class).hasMessage("file");
+    }
+
+    @Test
+    public void checkFileLogIsNullShouldThrowException() {
+        assertThatThrownBy(() -> Preconditions.checkFile(new File(StringUtils.EMPTY), null))
+            .isExactlyInstanceOf(NullPointerException.class).hasMessage("log");
+    }
+
+    @Test
     public void checkFileDoesNotExistShouldThrowException() {
         mojo.setFile(new File("nonExistingFile"));
         assertThatThrownBy(() -> Preconditions.checkFile(mojo.getFile(), mojo.getLog()))
@@ -51,6 +64,18 @@ public class PreconditionsTest {
         mojo.setFile(file);
         assertThatThrownBy(() -> Preconditions.checkFile(mojo.getFile(), mojo.getLog()))
             .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("file not readable");
+    }
+
+    @Test
+    public void checkIntoIntoIsNullShouldThrowException() {
+        assertThatThrownBy(() -> Preconditions.checkInto(null, mojo.getLog()))
+            .isExactlyInstanceOf(NullPointerException.class).hasMessage("into");
+    }
+
+    @Test
+    public void checkIntoLogIsNullShouldThrowException() {
+        assertThatThrownBy(() -> Preconditions.checkInto(new File(StringUtils.EMPTY), null))
+            .isExactlyInstanceOf(NullPointerException.class).hasMessage("log");
     }
 
     @Test
