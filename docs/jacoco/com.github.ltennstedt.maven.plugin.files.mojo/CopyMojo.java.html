@@ -17,10 +17,12 @@
 package com.github.ltennstedt.maven.plugin.files.mojo;
 
 import com.github.ltennstedt.maven.plugin.files.util.Preconditions;
+import com.google.common.annotations.Beta;
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.MoreObjects;
 import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -33,59 +35,80 @@ import org.apache.maven.plugins.annotations.Parameter;
  * @author Lars Tennstedt
  * @since 1
  */
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">@Beta</span>
 @Mojo(name = &quot;copy&quot;)
-<span class="fc" id="L37">public final class CopyMojo extends AbstractMojo {</span>
+<span class="fc" id="L40">public final class CopyMojo extends AbstractMojo {</span>
     /**
      * Source file or directory
+     *
+     * @since 1
      */
     @Parameter(required = true)
     private File file;
 
     /**
      * Target directory
+     *
+     * @since 1
      */
     @Parameter(required = true)
     private File into;
 
+    /**
+     * {@inheritDoc}
+     *
+     * @since 1
+     */
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-<span class="fc" id="L52">        Preconditions.checkFile(file, getLog());</span>
-<span class="fc" id="L53">        Preconditions.checkInto(into, getLog());</span>
-<span class="fc" id="L54">        getLog().info(new StringBuilder(&quot;Copy &quot;).append(file.getAbsolutePath()).append(&quot; into &quot;)</span>
-<span class="fc" id="L55">            .append(into.getAbsolutePath()).toString());</span>
+<span class="fc" id="L64">        Preconditions.checkFile(file, getLog());</span>
+<span class="fc" id="L65">        Preconditions.checkInto(into, getLog());</span>
+<span class="fc" id="L66">        getLog().info(new StringBuilder(&quot;Copy &quot;).append(file.getAbsolutePath()).append(&quot; into &quot;)</span>
+<span class="fc" id="L67">            .append(into.getAbsolutePath()).toString());</span>
         try {
-<span class="fc bfc" id="L57" title="All 2 branches covered.">            if (file.isFile()) {</span>
-<span class="fc" id="L58">                FileUtils.copyFileToDirectory(file, into);</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">            if (file.isFile()) {</span>
+<span class="fc" id="L70">                FileUtils.copyFileToDirectory(file, into);</span>
             } else {
-<span class="fc" id="L60">                FileUtils.copyDirectory(file, into);</span>
+<span class="fc" id="L72">                FileUtils.copyDirectory(file, into);</span>
             }
-<span class="nc" id="L62">        } catch (final IOException exception) {</span>
-<span class="nc" id="L63">            final String message = &quot;Copying failed&quot;;</span>
-<span class="nc" id="L64">            getLog().error(message);</span>
-<span class="nc" id="L65">            throw new MojoExecutionException(message, exception);</span>
-<span class="fc" id="L66">        }</span>
-<span class="fc" id="L67">        getLog().info(&quot;Copying successful&quot;);</span>
-<span class="fc" id="L68">    }</span>
+<span class="nc" id="L74">        } catch (final IOException exception) {</span>
+<span class="nc" id="L75">            final String message = &quot;Copying failed&quot;;</span>
+<span class="nc" id="L76">            getLog().error(message);</span>
+<span class="nc" id="L77">            throw new MojoExecutionException(message, exception);</span>
+<span class="fc" id="L78">        }</span>
+<span class="fc" id="L79">        getLog().info(&quot;Copying successful&quot;);</span>
+<span class="fc" id="L80">    }</span>
 
+    /**
+     * {@inheritDoc}
+     *
+     * @since 1
+     */
     @Override
     public String toString() {
-<span class="fc" id="L72">        return new ToStringBuilder(this).append(&quot;file&quot;, file).append(&quot;into&quot;, into).toString();</span>
+<span class="fc" id="L89">        return MoreObjects.toStringHelper(this).add(&quot;file&quot;, file).add(&quot;into&quot;, into).toString();</span>
     }
 
+    @VisibleForTesting
     public File getFile() {
-<span class="fc" id="L76">        return file;</span>
+<span class="fc" id="L94">        return file;</span>
     }
 
+    @VisibleForTesting
     public void setFile(final File file) {
-<span class="fc" id="L80">        this.file = file;</span>
-<span class="fc" id="L81">    }</span>
+<span class="pc bpc" id="L99" title="2 of 4 branches missed.">        assert file != null;</span>
+<span class="fc" id="L100">        this.file = file;</span>
+<span class="fc" id="L101">    }</span>
 
+    @VisibleForTesting
     public File getInto() {
-<span class="fc" id="L84">        return into;</span>
+<span class="fc" id="L105">        return into;</span>
     }
 
+    @VisibleForTesting
     public void setInto(final File into) {
-<span class="fc" id="L88">        this.into = into;</span>
-<span class="fc" id="L89">    }</span>
+<span class="pc bpc" id="L110" title="2 of 4 branches missed.">        assert into != null;</span>
+<span class="fc" id="L111">        this.into = into;</span>
+<span class="fc" id="L112">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

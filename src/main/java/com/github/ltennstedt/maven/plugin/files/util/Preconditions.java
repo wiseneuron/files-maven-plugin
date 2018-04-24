@@ -16,15 +16,42 @@
 
 package com.github.ltennstedt.maven.plugin.files.util;
 
+import static java.util.Objects.requireNonNull;
+
+import com.google.common.annotations.Beta;
 import java.io.File;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.logging.Log;
 
+/**
+ * Preconditions
+ *
+ * @author Lars Tennstedt
+ * @since 1
+ */
+@Beta
 public final class Preconditions {
     private Preconditions() {
     }
 
+    /**
+     * Checks {@code file}
+     *
+     * @param file
+     *            {@code file}
+     * @param log
+     *            {@link Log}
+     * @throws MojoExecutionException
+     *             if {@code !file.exists || !file.canRead}
+     * @throws NullPointerException
+     *             if {@code file == null}
+     * @throws NullPointerException
+     *             if {@code log == null}
+     * @since 1
+     */
     public static void checkFile(final File file, final Log log) throws MojoExecutionException {
+        requireNonNull(file, "file");
+        requireNonNull(log, "log");
         if (!file.exists()) {
             final String message = "file does not exist";
             log.error(message);
@@ -36,7 +63,24 @@ public final class Preconditions {
         }
     }
 
+    /**
+     * Checks {@code into}
+     *
+     * @param into
+     *            {@code into}
+     * @param log
+     *            {@link Log}
+     * @throws MojoExecutionException
+     *             if {@code into.isFile || !into.canWrite}
+     * @throws NullPointerException
+     *             if {@code into == null}
+     * @throws NullPointerException
+     *             if {@code log == null}
+     * @since 1
+     */
     public static void checkInto(final File into, final Log log) throws MojoExecutionException {
+        requireNonNull(into, "into");
+        requireNonNull(log, "log");
         if (into.exists()) {
             if (into.isFile()) {
                 final String message = "into is a file";

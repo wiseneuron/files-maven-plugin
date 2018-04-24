@@ -18,10 +18,10 @@ package com.github.ltennstedt.maven.plugin.files.mojo;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.google.common.base.MoreObjects;
 import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.junit.After;
@@ -72,11 +72,10 @@ public final class MoveMojoTest {
 
     @Test
     public void toStringShouldSucceed() {
-        final File file = new File("testarea/move/fileToMove.txt");
-        mojo.setFile(file);
+        mojo.setFile(new File("testarea/move/fileToMove.txt"));
         mojo.setInto(new File("testarea/into"));
         assertThat(mojo.toString()).isEqualTo(
-            new ToStringBuilder(mojo).append("file", mojo.getFile()).append("into", mojo.getInto()).toString());
+            MoreObjects.toStringHelper(mojo).add("file", mojo.getFile()).add("into", mojo.getInto()).toString());
     }
 
     @After

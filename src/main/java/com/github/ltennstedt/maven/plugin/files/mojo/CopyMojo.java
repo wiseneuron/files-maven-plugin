@@ -17,10 +17,12 @@
 package com.github.ltennstedt.maven.plugin.files.mojo;
 
 import com.github.ltennstedt.maven.plugin.files.util.Preconditions;
+import com.google.common.annotations.Beta;
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.MoreObjects;
 import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -33,20 +35,30 @@ import org.apache.maven.plugins.annotations.Parameter;
  * @author Lars Tennstedt
  * @since 1
  */
+@Beta
 @Mojo(name = "copy")
 public final class CopyMojo extends AbstractMojo {
     /**
      * Source file or directory
+     *
+     * @since 1
      */
     @Parameter(required = true)
     private File file;
 
     /**
      * Target directory
+     *
+     * @since 1
      */
     @Parameter(required = true)
     private File into;
 
+    /**
+     * {@inheritDoc}
+     *
+     * @since 1
+     */
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         Preconditions.checkFile(file, getLog());
@@ -67,24 +79,35 @@ public final class CopyMojo extends AbstractMojo {
         getLog().info("Copying successful");
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @since 1
+     */
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("file", file).append("into", into).toString();
+        return MoreObjects.toStringHelper(this).add("file", file).add("into", into).toString();
     }
 
+    @VisibleForTesting
     public File getFile() {
         return file;
     }
 
+    @VisibleForTesting
     public void setFile(final File file) {
+        assert file != null;
         this.file = file;
     }
 
+    @VisibleForTesting
     public File getInto() {
         return into;
     }
 
+    @VisibleForTesting
     public void setInto(final File into) {
+        assert into != null;
         this.into = into;
     }
 }

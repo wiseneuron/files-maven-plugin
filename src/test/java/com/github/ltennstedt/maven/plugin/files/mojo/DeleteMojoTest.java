@@ -19,10 +19,10 @@ package com.github.ltennstedt.maven.plugin.files.mojo;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import com.google.common.base.MoreObjects;
 import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.junit.AfterClass;
@@ -80,9 +80,8 @@ public final class DeleteMojoTest {
 
     @Test
     public void toStringShouldSucceed() {
-        final File file = new File("testarea/delete/fileToDelete.txt");
-        mojo.setFile(file);
-        assertThat(mojo.toString()).isEqualTo(new ToStringBuilder(mojo).append("file", mojo.getFile()).toString());
+        mojo.setFile(new File("testarea/delete/fileToDelete.txt"));
+        assertThat(mojo.toString()).isEqualTo(MoreObjects.toStringHelper(mojo).add("file", mojo.getFile()).toString());
     }
 
     @AfterClass

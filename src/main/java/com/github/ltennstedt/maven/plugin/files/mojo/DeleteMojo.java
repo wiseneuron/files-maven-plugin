@@ -16,10 +16,12 @@
 
 package com.github.ltennstedt.maven.plugin.files.mojo;
 
+import com.google.common.annotations.Beta;
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.MoreObjects;
 import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -32,6 +34,7 @@ import org.apache.maven.plugins.annotations.Parameter;
  * @author Lars Tennstedt
  * @since 1
  */
+@Beta
 @Mojo(name = "delete")
 public final class DeleteMojo extends AbstractMojo {
     /**
@@ -40,6 +43,11 @@ public final class DeleteMojo extends AbstractMojo {
     @Parameter(required = true)
     private File file;
 
+    /**
+     * {@inheritDoc}
+     *
+     * @since 1
+     */
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         check();
@@ -62,6 +70,13 @@ public final class DeleteMojo extends AbstractMojo {
         getLog().info("Deletion successful");
     }
 
+    /**
+     * Checks {@code file}
+     *
+     * @throws MojoExecutionException
+     *             if {@code !file.exists || !file.canWrite}
+     * @since 1
+     */
     void check() throws MojoExecutionException {
         if (!file.exists()) {
             final String message = "file does not exist";
@@ -74,16 +89,24 @@ public final class DeleteMojo extends AbstractMojo {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @since 1
+     */
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("file", file).toString();
+        return MoreObjects.toStringHelper(this).add("file", file).toString();
     }
 
-    public File getFile() {
+    @VisibleForTesting
+    File getFile() {
         return file;
     }
 
-    public void setFile(final File file) {
+    @VisibleForTesting
+    void setFile(final File file) {
+        assert file != null;
         this.file = file;
     }
 }
