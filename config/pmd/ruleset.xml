@@ -4,7 +4,8 @@
     Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS 
     IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language 
     governing permissions and limitations under the License. -->
-<ruleset name="Custom ruleset" xmlns="http://pmd.sourceforge.net/ruleset/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<ruleset name="Custom ruleset" xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
     <description>ruleset</description>
     <rule ref="category/java/bestpractices.xml">
@@ -16,6 +17,7 @@
     <rule ref="category/java/codestyle.xml">
         <exclude name="AtLeastOneConstructor" />
         <exclude name="AvoidFinalLocalVariable" />
+        <exclude name="ClassNamingConventions" />
         <exclude name="CommentDefaultAccessModifier" />
         <exclude name="ConfusingTernary" />
         <exclude name="DefaultPackage" />
