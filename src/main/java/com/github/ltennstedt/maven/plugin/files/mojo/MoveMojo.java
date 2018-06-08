@@ -63,8 +63,7 @@ public final class MoveMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         Preconditions.checkFile(file, getLog());
         Preconditions.checkInto(into, getLog());
-        getLog().info(new StringBuilder("Move ").append(file.getAbsolutePath()).append(" into ")
-            .append(into.getAbsolutePath()).toString());
+        getLog().info("Moving " + file.getAbsolutePath() + " into " + into.getAbsolutePath());
         try {
             if (file.isFile()) {
                 FileUtils.copyFileToDirectory(file, into);

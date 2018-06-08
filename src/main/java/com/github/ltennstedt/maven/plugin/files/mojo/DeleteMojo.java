@@ -51,7 +51,7 @@ public final class DeleteMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         check();
-        getLog().info(new StringBuilder("Delete ").append(file.getAbsolutePath()).toString());
+        getLog().info("Deleting " + file.getAbsolutePath());
         if (file.isFile()) {
             if (!file.delete()) {
                 final String message = "Deletion failed";
