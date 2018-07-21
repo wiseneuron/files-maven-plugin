@@ -37,77 +37,77 @@ import org.apache.maven.plugins.annotations.Parameter;
 <span class="pc bpc" id="L37" title="1 of 2 branches missed.">@Beta</span>
 @Mojo(name = &quot;delete&quot;)
 <span class="fc" id="L39">public final class DeleteMojo extends AbstractMojo {</span>
-    /**
-     * File or directory which will be deleted
-     */
-    @Parameter(required = true)
-    private File file;
+  /**
+   * File or directory which will be deleted
+   */
+  @Parameter(required = true)
+  private File file;
 
-    /**
-     * {@inheritDoc}
-     *
-     * @since 1
-     */
-    @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
-<span class="fc" id="L53">        check();</span>
-<span class="fc" id="L54">        getLog().info(new StringBuilder(&quot;Delete &quot;).append(file.getAbsolutePath()).toString());</span>
-<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (file.isFile()) {</span>
-<span class="pc bpc" id="L56" title="1 of 2 branches missed.">            if (!file.delete()) {</span>
-<span class="nc" id="L57">                final String message = &quot;Deletion failed&quot;;</span>
-<span class="nc" id="L58">                getLog().error(message);</span>
-<span class="nc" id="L59">                throw new MojoExecutionException(message);</span>
-            }
-        } else {
-            try {
-<span class="fc" id="L63">                FileUtils.deleteDirectory(file);</span>
-<span class="nc" id="L64">            } catch (final IOException exception) {</span>
-<span class="nc" id="L65">                final String message = &quot;Deletion failed&quot;;</span>
-<span class="nc" id="L66">                getLog().error(message);</span>
-<span class="nc" id="L67">                throw new MojoExecutionException(message, exception);</span>
-<span class="fc" id="L68">            }</span>
-        }
-<span class="fc" id="L70">        getLog().info(&quot;Deletion successful&quot;);</span>
-<span class="fc" id="L71">    }</span>
-
-    /**
-     * Checks {@code file}
-     *
-     * @throws MojoExecutionException
-     *             if {@code !file.exists || !file.canWrite}
-     * @since 1
-     */
-    void check() throws MojoExecutionException {
-<span class="fc bfc" id="L81" title="All 2 branches covered.">        if (!file.exists()) {</span>
-<span class="fc" id="L82">            final String message = &quot;file does not exist&quot;;</span>
-<span class="fc" id="L83">            getLog().error(message);</span>
-<span class="fc" id="L84">            throw new MojoExecutionException(message);</span>
-<span class="fc bfc" id="L85" title="All 2 branches covered.">        } else if (!file.canWrite()) {</span>
-<span class="fc" id="L86">            final String message = &quot;file not writable&quot;;</span>
-<span class="fc" id="L87">            getLog().error(message);</span>
-<span class="fc" id="L88">            throw new MojoExecutionException(message);</span>
-        }
-<span class="fc" id="L90">    }</span>
-
-    /**
-     * {@inheritDoc}
-     *
-     * @since 1
-     */
-    @Override
-    public String toString() {
-<span class="fc" id="L99">        return MoreObjects.toStringHelper(this).add(&quot;file&quot;, file).toString();</span>
+  /**
+   * {@inheritDoc}
+   *
+   * @since 1
+   */
+  @Override
+  public void execute() throws MojoExecutionException, MojoFailureException {
+<span class="fc" id="L53">    check();</span>
+<span class="fc" id="L54">    getLog().info(&quot;Deleting &quot; + file.getAbsolutePath());</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">    if (file.isFile()) {</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">      if (!file.delete()) {</span>
+<span class="nc" id="L57">        final String message = &quot;Deletion failed&quot;;</span>
+<span class="nc" id="L58">        getLog().error(message);</span>
+<span class="nc" id="L59">        throw new MojoExecutionException(message);</span>
+      }
+    } else {
+      try {
+<span class="fc" id="L63">        FileUtils.deleteDirectory(file);</span>
+<span class="nc" id="L64">      } catch (final IOException exception) {</span>
+<span class="nc" id="L65">        final String message = &quot;Deletion failed&quot;;</span>
+<span class="nc" id="L66">        getLog().error(message);</span>
+<span class="nc" id="L67">        throw new MojoExecutionException(message, exception);</span>
+<span class="fc" id="L68">      }</span>
     }
+<span class="fc" id="L70">    getLog().info(&quot;Deletion successful&quot;);</span>
+<span class="fc" id="L71">  }</span>
 
-    @VisibleForTesting
-    File getFile() {
-<span class="fc" id="L104">        return file;</span>
+  /**
+   * Checks {@code file}
+   *
+   * @throws MojoExecutionException
+   *           if {@code !file.exists || !file.canWrite}
+   * @since 1
+   */
+  void check() throws MojoExecutionException {
+<span class="fc bfc" id="L81" title="All 2 branches covered.">    if (!file.exists()) {</span>
+<span class="fc" id="L82">      final String message = &quot;file does not exist&quot;;</span>
+<span class="fc" id="L83">      getLog().error(message);</span>
+<span class="fc" id="L84">      throw new MojoExecutionException(message);</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">    } else if (!file.canWrite()) {</span>
+<span class="fc" id="L86">      final String message = &quot;file not writable&quot;;</span>
+<span class="fc" id="L87">      getLog().error(message);</span>
+<span class="fc" id="L88">      throw new MojoExecutionException(message);</span>
     }
+<span class="fc" id="L90">  }</span>
 
-    @VisibleForTesting
-    void setFile(final File file) {
-<span class="pc bpc" id="L109" title="2 of 4 branches missed.">        assert file != null;</span>
-<span class="fc" id="L110">        this.file = file;</span>
-<span class="fc" id="L111">    }</span>
+  /**
+   * {@inheritDoc}
+   *
+   * @since 1
+   */
+  @Override
+  public String toString() {
+<span class="fc" id="L99">    return MoreObjects.toStringHelper(this).add(&quot;file&quot;, file).toString();</span>
+  }
+
+  @VisibleForTesting
+  File getFile() {
+<span class="fc" id="L104">    return file;</span>
+  }
+
+  @VisibleForTesting
+  void setFile(final File file) {
+<span class="pc bpc" id="L109" title="2 of 4 branches missed.">    assert file != null;</span>
+<span class="fc" id="L110">    this.file = file;</span>
+<span class="fc" id="L111">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>

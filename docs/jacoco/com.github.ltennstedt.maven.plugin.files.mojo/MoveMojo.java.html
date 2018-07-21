@@ -38,79 +38,78 @@ import org.apache.maven.plugins.annotations.Parameter;
 <span class="pc bpc" id="L38" title="1 of 2 branches missed.">@Beta</span>
 @Mojo(name = &quot;move&quot;)
 <span class="fc" id="L40">public final class MoveMojo extends AbstractMojo {</span>
-    /**
-     * Source file or directory
-     *
-     * @since 1
-     */
-    @Parameter(required = true)
-    private File file;
+  /**
+   * Source file or directory
+   *
+   * @since 1
+   */
+  @Parameter(required = true)
+  private File file;
 
-    /**
-     * Target directory
-     *
-     * @since 1
-     */
-    @Parameter(required = true)
-    private File into;
+  /**
+   * Target directory
+   *
+   * @since 1
+   */
+  @Parameter(required = true)
+  private File into;
 
-    /**
-     * {@inheritDoc}
-     *
-     * @since 1
-     */
-    @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
-<span class="fc" id="L64">        Preconditions.checkFile(file, getLog());</span>
-<span class="fc" id="L65">        Preconditions.checkInto(into, getLog());</span>
-<span class="fc" id="L66">        getLog().info(new StringBuilder(&quot;Move &quot;).append(file.getAbsolutePath()).append(&quot; into &quot;)</span>
-<span class="fc" id="L67">            .append(into.getAbsolutePath()).toString());</span>
-        try {
-<span class="fc bfc" id="L69" title="All 2 branches covered.">            if (file.isFile()) {</span>
-<span class="fc" id="L70">                FileUtils.copyFileToDirectory(file, into);</span>
-<span class="fc" id="L71">                file.delete();</span>
-            } else {
-<span class="fc" id="L73">                FileUtils.copyDirectory(file, into);</span>
-<span class="fc" id="L74">                FileUtils.deleteDirectory(file);</span>
-            }
-<span class="nc" id="L76">        } catch (final IOException exception) {</span>
-<span class="nc" id="L77">            final String message = &quot;Moving failed&quot;;</span>
-<span class="nc" id="L78">            getLog().error(message);</span>
-<span class="nc" id="L79">            throw new MojoExecutionException(message, exception);</span>
-<span class="fc" id="L80">        }</span>
-<span class="fc" id="L81">        getLog().info(&quot;Moving successful&quot;);</span>
-<span class="fc" id="L82">    }</span>
+  /**
+   * {@inheritDoc}
+   *
+   * @since 1
+   */
+  @Override
+  public void execute() throws MojoExecutionException, MojoFailureException {
+<span class="fc" id="L64">    Preconditions.checkFile(file, getLog());</span>
+<span class="fc" id="L65">    Preconditions.checkInto(into, getLog());</span>
+<span class="fc" id="L66">    getLog().info(&quot;Moving &quot; + file.getAbsolutePath() + &quot; into &quot; + into.getAbsolutePath());</span>
+    try {
+<span class="fc bfc" id="L68" title="All 2 branches covered.">      if (file.isFile()) {</span>
+<span class="fc" id="L69">        FileUtils.copyFileToDirectory(file, into);</span>
+<span class="fc" id="L70">        file.delete();</span>
+      } else {
+<span class="fc" id="L72">        FileUtils.copyDirectory(file, into);</span>
+<span class="fc" id="L73">        FileUtils.deleteDirectory(file);</span>
+      }
+<span class="nc" id="L75">    } catch (final IOException exception) {</span>
+<span class="nc" id="L76">      final String message = &quot;Moving failed&quot;;</span>
+<span class="nc" id="L77">      getLog().error(message);</span>
+<span class="nc" id="L78">      throw new MojoExecutionException(message, exception);</span>
+<span class="fc" id="L79">    }</span>
+<span class="fc" id="L80">    getLog().info(&quot;Moving successful&quot;);</span>
+<span class="fc" id="L81">  }</span>
 
-    /**
-     * {@inheritDoc}
-     *
-     * @since 1
-     */
-    @Override
-    public String toString() {
-<span class="fc" id="L91">        return MoreObjects.toStringHelper(this).add(&quot;file&quot;, file).add(&quot;into&quot;, into).toString();</span>
-    }
+  /**
+   * {@inheritDoc}
+   *
+   * @since 1
+   */
+  @Override
+  public String toString() {
+<span class="fc" id="L90">    return MoreObjects.toStringHelper(this).add(&quot;file&quot;, file).add(&quot;into&quot;, into).toString();</span>
+  }
 
-    @VisibleForTesting
-    File getFile() {
-<span class="fc" id="L96">        return file;</span>
-    }
+  @VisibleForTesting
+  File getFile() {
+<span class="fc" id="L95">    return file;</span>
+  }
 
-    @VisibleForTesting
-    void setFile(final File file) {
-<span class="pc bpc" id="L101" title="2 of 4 branches missed.">        assert file != null;</span>
-<span class="fc" id="L102">        this.file = file;</span>
-<span class="fc" id="L103">    }</span>
+  @VisibleForTesting
+  void setFile(final File file) {
+<span class="pc bpc" id="L100" title="2 of 4 branches missed.">    assert file != null;</span>
+<span class="fc" id="L101">    this.file = file;</span>
+<span class="fc" id="L102">  }</span>
 
-    @VisibleForTesting
-    File getInto() {
-<span class="fc" id="L107">        return into;</span>
-    }
+  @VisibleForTesting
+  File getInto() {
+<span class="fc" id="L106">    return into;</span>
+  }
 
-    @VisibleForTesting
-    void setInto(final File into) {
-<span class="pc bpc" id="L112" title="2 of 4 branches missed.">        assert into != null;</span>
-<span class="fc" id="L113">        this.into = into;</span>
-<span class="fc" id="L114">    }</span>
+  @VisibleForTesting
+  void setInto(final File into) {
+<span class="pc bpc" id="L111" title="2 of 4 branches missed.">    assert into != null;</span>
+<span class="fc" id="L112">    this.into = into;</span>
+<span class="fc" id="L113">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
