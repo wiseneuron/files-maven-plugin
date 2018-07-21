@@ -38,75 +38,75 @@ import org.apache.maven.plugins.annotations.Parameter;
 @Beta
 @Mojo(name = "copy")
 public final class CopyMojo extends AbstractMojo {
-    /**
-     * Source file or directory
-     *
-     * @since 1
-     */
-    @Parameter(required = true)
-    private File file;
+  /**
+   * Source file or directory
+   *
+   * @since 1
+   */
+  @Parameter(required = true)
+  private File file;
 
-    /**
-     * Target directory
-     *
-     * @since 1
-     */
-    @Parameter(required = true)
-    private File into;
+  /**
+   * Target directory
+   *
+   * @since 1
+   */
+  @Parameter(required = true)
+  private File into;
 
-    /**
-     * {@inheritDoc}
-     *
-     * @since 1
-     */
-    @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
-        Preconditions.checkFile(file, getLog());
-        Preconditions.checkInto(into, getLog());
-        getLog().info("Copying " + file.getAbsolutePath() + " into " + into.getAbsolutePath());
-        try {
-            if (file.isFile()) {
-                FileUtils.copyFileToDirectory(file, into);
-            } else {
-                FileUtils.copyDirectory(file, into);
-            }
-        } catch (final IOException exception) {
-            final String message = "Copying failed";
-            getLog().error(message);
-            throw new MojoExecutionException(message, exception);
-        }
-        getLog().info("Copying successful");
+  /**
+   * {@inheritDoc}
+   *
+   * @since 1
+   */
+  @Override
+  public void execute() throws MojoExecutionException, MojoFailureException {
+    Preconditions.checkFile(file, getLog());
+    Preconditions.checkInto(into, getLog());
+    getLog().info("Copying " + file.getAbsolutePath() + " into " + into.getAbsolutePath());
+    try {
+      if (file.isFile()) {
+        FileUtils.copyFileToDirectory(file, into);
+      } else {
+        FileUtils.copyDirectory(file, into);
+      }
+    } catch (final IOException exception) {
+      final String message = "Copying failed";
+      getLog().error(message);
+      throw new MojoExecutionException(message, exception);
     }
+    getLog().info("Copying successful");
+  }
 
-    /**
-     * {@inheritDoc}
-     *
-     * @since 1
-     */
-    @Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this).add("file", file).add("into", into).toString();
-    }
+  /**
+   * {@inheritDoc}
+   *
+   * @since 1
+   */
+  @Override
+  public String toString() {
+    return MoreObjects.toStringHelper(this).add("file", file).add("into", into).toString();
+  }
 
-    @VisibleForTesting
-    public File getFile() {
-        return file;
-    }
+  @VisibleForTesting
+  public File getFile() {
+    return file;
+  }
 
-    @VisibleForTesting
-    public void setFile(final File file) {
-        assert file != null;
-        this.file = file;
-    }
+  @VisibleForTesting
+  public void setFile(final File file) {
+    assert file != null;
+    this.file = file;
+  }
 
-    @VisibleForTesting
-    public File getInto() {
-        return into;
-    }
+  @VisibleForTesting
+  public File getInto() {
+    return into;
+  }
 
-    @VisibleForTesting
-    public void setInto(final File into) {
-        assert into != null;
-        this.into = into;
-    }
+  @VisibleForTesting
+  public void setInto(final File into) {
+    assert into != null;
+    this.into = into;
+  }
 }

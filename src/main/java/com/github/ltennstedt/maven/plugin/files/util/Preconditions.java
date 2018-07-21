@@ -31,67 +31,67 @@ import org.apache.maven.plugin.logging.Log;
  */
 @Beta
 public final class Preconditions {
-    private Preconditions() {
-    }
+  private Preconditions() {
+  }
 
-    /**
-     * Checks {@code file}
-     *
-     * @param file
-     *            {@code file}
-     * @param log
-     *            {@link Log}
-     * @throws MojoExecutionException
-     *             if {@code !file.exists || !file.canRead}
-     * @throws NullPointerException
-     *             if {@code file == null}
-     * @throws NullPointerException
-     *             if {@code log == null}
-     * @since 1
-     */
-    public static void checkFile(final File file, final Log log) throws MojoExecutionException {
-        requireNonNull(file, "file");
-        requireNonNull(log, "log");
-        if (!file.exists()) {
-            final String message = "file does not exist";
-            log.error(message);
-            throw new MojoExecutionException(message);
-        } else if (!file.canRead()) {
-            final String message = "file not readable";
-            log.error(message);
-            throw new MojoExecutionException(message);
-        }
+  /**
+   * Checks {@code file}
+   *
+   * @param file
+   *          {@code file}
+   * @param log
+   *          {@link Log}
+   * @throws MojoExecutionException
+   *           if {@code !file.exists || !file.canRead}
+   * @throws NullPointerException
+   *           if {@code file == null}
+   * @throws NullPointerException
+   *           if {@code log == null}
+   * @since 1
+   */
+  public static void checkFile(final File file, final Log log) throws MojoExecutionException {
+    requireNonNull(file, "file");
+    requireNonNull(log, "log");
+    if (!file.exists()) {
+      final String message = "file does not exist";
+      log.error(message);
+      throw new MojoExecutionException(message);
+    } else if (!file.canRead()) {
+      final String message = "file not readable";
+      log.error(message);
+      throw new MojoExecutionException(message);
     }
+  }
 
-    /**
-     * Checks {@code into}
-     *
-     * @param into
-     *            {@code into}
-     * @param log
-     *            {@link Log}
-     * @throws MojoExecutionException
-     *             if {@code into.isFile || !into.canWrite}
-     * @throws NullPointerException
-     *             if {@code into == null}
-     * @throws NullPointerException
-     *             if {@code log == null}
-     * @since 1
-     */
-    public static void checkInto(final File into, final Log log) throws MojoExecutionException {
-        requireNonNull(into, "into");
-        requireNonNull(log, "log");
-        if (into.exists()) {
-            if (into.isFile()) {
-                final String message = "into is a file";
-                log.error(message);
-                throw new MojoExecutionException(message);
-            }
-            if (!into.canWrite()) {
-                final String message = "into not writable";
-                log.error(message);
-                throw new MojoExecutionException(message);
-            }
-        }
+  /**
+   * Checks {@code into}
+   *
+   * @param into
+   *          {@code into}
+   * @param log
+   *          {@link Log}
+   * @throws MojoExecutionException
+   *           if {@code into.isFile || !into.canWrite}
+   * @throws NullPointerException
+   *           if {@code into == null}
+   * @throws NullPointerException
+   *           if {@code log == null}
+   * @since 1
+   */
+  public static void checkInto(final File into, final Log log) throws MojoExecutionException {
+    requireNonNull(into, "into");
+    requireNonNull(log, "log");
+    if (into.exists()) {
+      if (into.isFile()) {
+        final String message = "into is a file";
+        log.error(message);
+        throw new MojoExecutionException(message);
+      }
+      if (!into.canWrite()) {
+        final String message = "into not writable";
+        log.error(message);
+        throw new MojoExecutionException(message);
+      }
     }
+  }
 }
