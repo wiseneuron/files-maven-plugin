@@ -5,57 +5,57 @@
     IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language 
     governing permissions and limitations under the License. -->
 <ruleset name="Custom ruleset" xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
-    <description>ruleset</description>
-    <rule ref="category/java/bestpractices.xml">
-        <exclude name="AccessorClassGeneration" />
-        <exclude name="JUnitAssertionsShouldIncludeMessage" />
-        <exclude name="JUnitTestContainsTooManyAsserts" />
-        <exclude name="JUnitTestsShouldIncludeAssert" />
-    </rule>
-    <rule ref="category/java/codestyle.xml">
-        <exclude name="AtLeastOneConstructor" />
-        <exclude name="AvoidFinalLocalVariable" />
-        <exclude name="ClassNamingConventions" />
-        <exclude name="CommentDefaultAccessModifier" />
-        <exclude name="ConfusingTernary" />
-        <exclude name="DefaultPackage" />
-        <exclude name="LongVariable" />
-        <exclude name="OnlyOneReturn" />
-        <exclude name="ShortMethodName" />
-        <exclude name="ShortVariable" />
-        <exclude name="VariableNamingConventions" />
-    </rule>
-    <rule ref="category/java/design.xml">
-        <exclude name="AvoidThrowingNullPointerException" />
-        <exclude name="CyclomaticComplexity" />
-        <exclude name="DataClass" />
-        <exclude name="ExcessiveClassLength" />
-        <exclude name="ExcessiveImports" />
-        <exclude name="ExcessivePublicCount" />
-        <exclude name="FinalFieldCouldBeStatic" />
-        <exclude name="GodClass" />
-        <exclude name="LawOfDemeter" />
-        <exclude name="LoosePackageCoupling" />
-        <exclude name="NcssCount" />
-        <exclude name="TooManyFields" />
-        <exclude name="TooManyMethods" />
-    </rule>
-    <rule ref="category/java/documentation.xml">
-        <exclude name="CommentRequired" />
-        <exclude name="CommentSize" />
-    </rule>
-    <rule ref="category/java/errorprone.xml">
-        <exclude name="AvoidDuplicateLiterals" />
-        <exclude name="BeanMembersShouldSerialize" />
-        <exclude name="DataflowAnomalyAnalysis" />
-        <exclude name="AvoidLiteralsInIfCondition" />
-    </rule>
-    <rule ref="category/java/multithreading.xml">
-        <exclude name="UseConcurrentHashMap" />
-    </rule>
-    <rule ref="category/java/performance.xml">
-        <exclude name="AvoidInstantiatingObjectsInLoops" />
-    </rule>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+  <description>ruleset</description>
+  <rule ref="category/java/bestpractices.xml">
+    <exclude name="AccessorClassGeneration" />
+    <exclude name="JUnitAssertionsShouldIncludeMessage" />
+    <exclude name="JUnitTestContainsTooManyAsserts" />
+    <exclude name="JUnitTestsShouldIncludeAssert" />
+  </rule>
+  <rule ref="category/java/codestyle.xml">
+    <exclude name="AtLeastOneConstructor" />
+    <exclude name="AvoidFinalLocalVariable" />
+    <exclude name="ClassNamingConventions" />
+    <exclude name="CommentDefaultAccessModifier" />
+    <exclude name="ConfusingTernary" />
+    <exclude name="DefaultPackage" />
+    <exclude name="LongVariable" />
+    <exclude name="OnlyOneReturn" />
+    <exclude name="ShortMethodName" />
+    <exclude name="ShortVariable" />
+    <exclude name="VariableNamingConventions" />
+  </rule>
+  <rule ref="category/java/design.xml">
+    <exclude name="AvoidThrowingNullPointerException" />
+    <exclude name="CyclomaticComplexity" />
+    <exclude name="DataClass" />
+    <exclude name="ExcessiveClassLength" />
+    <exclude name="ExcessiveImports" />
+    <exclude name="ExcessivePublicCount" />
+    <exclude name="FinalFieldCouldBeStatic" />
+    <exclude name="GodClass" />
+    <exclude name="LawOfDemeter" />
+    <exclude name="LoosePackageCoupling" />
+    <exclude name="NcssCount" />
+    <exclude name="TooManyFields" />
+    <exclude name="TooManyMethods" />
+  </rule>
+  <rule ref="category/java/documentation.xml">
+    <exclude name="CommentRequired" />
+    <exclude name="CommentSize" />
+  </rule>
+  <rule ref="category/java/errorprone.xml">
+    <exclude name="AvoidDuplicateLiterals" />
+    <exclude name="BeanMembersShouldSerialize" />
+    <exclude name="DataflowAnomalyAnalysis" />
+    <exclude name="AvoidLiteralsInIfCondition" />
+  </rule>
+  <rule ref="category/java/multithreading.xml">
+    <exclude name="UseConcurrentHashMap" />
+  </rule>
+  <rule ref="category/java/performance.xml">
+    <exclude name="AvoidInstantiatingObjectsInLoops" />
+  </rule>
 </ruleset>
