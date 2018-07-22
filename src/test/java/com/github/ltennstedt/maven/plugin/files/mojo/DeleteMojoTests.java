@@ -31,62 +31,62 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public final class DeleteMojoTests {
-  private static final File testarea = new File("testarea");
-  private DeleteMojo mojo;
+    private static final File testarea = new File("testarea");
+    private DeleteMojo mojo;
 
-  @BeforeAll
-  public static void setUpAll() throws IOException {
-    testarea.mkdir();
-    FileUtils.copyDirectoryToDirectory(new File("src/test/resources/delete"), testarea);
-    FileUtils.copyDirectoryToDirectory(new File("src/test/resources/check"), testarea);
-  }
+    @BeforeAll
+    public static void setUpAll() throws IOException {
+        testarea.mkdir();
+        FileUtils.copyDirectoryToDirectory(new File("src/test/resources/delete"), testarea);
+        FileUtils.copyDirectoryToDirectory(new File("src/test/resources/check"), testarea);
+    }
 
-  @BeforeEach
-  public void setUpEach() {
-    mojo = new DeleteMojo();
-  }
+    @BeforeEach
+    public void setUpEach() {
+        mojo = new DeleteMojo();
+    }
 
-  @Test
-  public void executeFileShouldSucceed() throws MojoFailureException, MojoExecutionException {
-    final File file = new File("testarea/delete/fileToDelete.txt");
-    mojo.setFile(file);
-    mojo.execute();
-    assertThat(file).doesNotExist();
-  }
+    @Test
+    public void executeFileShouldSucceed() throws MojoFailureException, MojoExecutionException {
+        final File file = new File("testarea/delete/fileToDelete.txt");
+        mojo.setFile(file);
+        mojo.execute();
+        assertThat(file).doesNotExist();
+    }
 
-  @Test
-  public void executeDirShouldSucceed() throws MojoFailureException, MojoExecutionException {
-    final File file = new File("testarea/delete/dirToDelete");
-    mojo.setFile(file);
-    mojo.execute();
-    assertThat(file).doesNotExist();
-  }
+    @Test
+    public void executeDirShouldSucceed() throws MojoFailureException, MojoExecutionException {
+        final File file = new File("testarea/delete/dirToDelete");
+        mojo.setFile(file);
+        mojo.execute();
+        assertThat(file).doesNotExist();
+    }
 
-  @Test
-  public void checkFileDoesNotExistShouldThrowException() {
-    mojo.setFile(new File("nonExistingFile"));
-    assertThatThrownBy(() -> mojo.check()).isExactlyInstanceOf(MojoExecutionException.class)
-      .hasMessage("file does not exist");
-  }
+    @Test
+    public void checkFileDoesNotExistShouldThrowException() {
+        mojo.setFile(new File("nonExistingFile"));
+        assertThatThrownBy(() -> mojo.check()).isExactlyInstanceOf(MojoExecutionException.class)
+            .hasMessage("file does not exist");
+    }
 
-  @Test
-  public void checkFileNotReadableShouldThrowException() {
-    final File file = new File("testarea/check/notReadableFile.txt");
-    file.setWritable(false);
-    mojo.setFile(file);
-    assertThatThrownBy(() -> mojo.check()).isExactlyInstanceOf(MojoExecutionException.class)
-      .hasMessage("file not writable");
-  }
+    @Test
+    public void checkFileNotReadableShouldThrowException() {
+        final File file = new File("testarea/check/notReadableFile.txt");
+        file.setWritable(false);
+        mojo.setFile(file);
+        assertThatThrownBy(() -> mojo.check()).isExactlyInstanceOf(MojoExecutionException.class)
+            .hasMessage("file not writable");
+    }
 
-  @Test
-  public void toStringShouldSucceed() {
-    mojo.setFile(new File("testarea/delete/fileToDelete.txt"));
-    assertThat(mojo.toString()).isEqualTo(MoreObjects.toStringHelper(mojo).add("file", mojo.getFile()).toString());
-  }
+    @Test
+    public void toStringShouldSucceed() {
+        mojo.setFile(new File("testarea/delete/fileToDelete.txt"));
+        assertThat(mojo.toString()).isEqualTo(MoreObjects.toStringHelper(mojo).add("file", mojo.getFile()).toString());
+    }
 
-  @AfterAll
-  public static void cleanUpAll() throws IOException {
-    new File("testarea/check/notWritableDir").setWritable(true);
-    FileUtils.deleteDirectory(testarea);
-  }
+    @AfterAll
+    public static void cleanUpAll() throws IOException {
+        new File("testarea/check/notWritableDir").setWritable(true);
+        FileUtils.deleteDirectory(testarea);
+    }
 }

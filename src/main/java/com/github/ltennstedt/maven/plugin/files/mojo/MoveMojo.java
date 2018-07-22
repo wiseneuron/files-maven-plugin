@@ -38,77 +38,77 @@ import org.apache.maven.plugins.annotations.Parameter;
 @Beta
 @Mojo(name = "move")
 public final class MoveMojo extends AbstractMojo {
-  /**
-   * Source file or directory
-   *
-   * @since 1
-   */
-  @Parameter(required = true)
-  private File file;
+    /**
+     * Source file or directory
+     *
+     * @since 1
+     */
+    @Parameter(required = true)
+    private File file;
 
-  /**
-   * Target directory
-   *
-   * @since 1
-   */
-  @Parameter(required = true)
-  private File into;
+    /**
+     * Target directory
+     *
+     * @since 1
+     */
+    @Parameter(required = true)
+    private File into;
 
-  /**
-   * {@inheritDoc}
-   *
-   * @since 1
-   */
-  @Override
-  public void execute() throws MojoExecutionException, MojoFailureException {
-    Preconditions.checkFile(file, getLog());
-    Preconditions.checkInto(into, getLog());
-    getLog().info("Moving " + file.getAbsolutePath() + " into " + into.getAbsolutePath());
-    try {
-      if (file.isFile()) {
-        FileUtils.copyFileToDirectory(file, into);
-        file.delete();
-      } else {
-        FileUtils.copyDirectory(file, into);
-        FileUtils.deleteDirectory(file);
-      }
-    } catch (final IOException exception) {
-      final String message = "Moving failed";
-      getLog().error(message);
-      throw new MojoExecutionException(message, exception);
+    /**
+     * {@inheritDoc}
+     *
+     * @since 1
+     */
+    @Override
+    public void execute() throws MojoExecutionException, MojoFailureException {
+        Preconditions.checkFile(file, getLog());
+        Preconditions.checkInto(into, getLog());
+        getLog().info("Moving " + file.getAbsolutePath() + " into " + into.getAbsolutePath());
+        try {
+            if (file.isFile()) {
+                FileUtils.copyFileToDirectory(file, into);
+                file.delete();
+            } else {
+                FileUtils.copyDirectory(file, into);
+                FileUtils.deleteDirectory(file);
+            }
+        } catch (final IOException exception) {
+            final String message = "Moving failed";
+            getLog().error(message);
+            throw new MojoExecutionException(message, exception);
+        }
+        getLog().info("Moving successful");
     }
-    getLog().info("Moving successful");
-  }
 
-  /**
-   * {@inheritDoc}
-   *
-   * @since 1
-   */
-  @Override
-  public String toString() {
-    return MoreObjects.toStringHelper(this).add("file", file).add("into", into).toString();
-  }
+    /**
+     * {@inheritDoc}
+     *
+     * @since 1
+     */
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this).add("file", file).add("into", into).toString();
+    }
 
-  @VisibleForTesting
-  File getFile() {
-    return file;
-  }
+    @VisibleForTesting
+    File getFile() {
+        return file;
+    }
 
-  @VisibleForTesting
-  void setFile(final File file) {
-    assert file != null;
-    this.file = file;
-  }
+    @VisibleForTesting
+    void setFile(final File file) {
+        assert file != null;
+        this.file = file;
+    }
 
-  @VisibleForTesting
-  File getInto() {
-    return into;
-  }
+    @VisibleForTesting
+    File getInto() {
+        return into;
+    }
 
-  @VisibleForTesting
-  void setInto(final File into) {
-    assert into != null;
-    this.into = into;
-  }
+    @VisibleForTesting
+    void setInto(final File into) {
+        assert into != null;
+        this.into = into;
+    }
 }

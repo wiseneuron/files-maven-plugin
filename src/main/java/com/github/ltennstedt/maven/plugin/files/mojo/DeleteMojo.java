@@ -37,76 +37,76 @@ import org.apache.maven.plugins.annotations.Parameter;
 @Beta
 @Mojo(name = "delete")
 public final class DeleteMojo extends AbstractMojo {
-  /**
-   * File or directory which will be deleted
-   */
-  @Parameter(required = true)
-  private File file;
+    /**
+     * File or directory which will be deleted
+     */
+    @Parameter(required = true)
+    private File file;
 
-  /**
-   * {@inheritDoc}
-   *
-   * @since 1
-   */
-  @Override
-  public void execute() throws MojoExecutionException, MojoFailureException {
-    check();
-    getLog().info("Deleting " + file.getAbsolutePath());
-    if (file.isFile()) {
-      if (!file.delete()) {
-        final String message = "Deletion failed";
-        getLog().error(message);
-        throw new MojoExecutionException(message);
-      }
-    } else {
-      try {
-        FileUtils.deleteDirectory(file);
-      } catch (final IOException exception) {
-        final String message = "Deletion failed";
-        getLog().error(message);
-        throw new MojoExecutionException(message, exception);
-      }
+    /**
+     * {@inheritDoc}
+     *
+     * @since 1
+     */
+    @Override
+    public void execute() throws MojoExecutionException, MojoFailureException {
+        check();
+        getLog().info("Deleting " + file.getAbsolutePath());
+        if (file.isFile()) {
+            if (!file.delete()) {
+                final String message = "Deletion failed";
+                getLog().error(message);
+                throw new MojoExecutionException(message);
+            }
+        } else {
+            try {
+                FileUtils.deleteDirectory(file);
+            } catch (final IOException exception) {
+                final String message = "Deletion failed";
+                getLog().error(message);
+                throw new MojoExecutionException(message, exception);
+            }
+        }
+        getLog().info("Deletion successful");
     }
-    getLog().info("Deletion successful");
-  }
 
-  /**
-   * Checks {@code file}
-   *
-   * @throws MojoExecutionException
-   *           if {@code !file.exists || !file.canWrite}
-   * @since 1
-   */
-  void check() throws MojoExecutionException {
-    if (!file.exists()) {
-      final String message = "file does not exist";
-      getLog().error(message);
-      throw new MojoExecutionException(message);
-    } else if (!file.canWrite()) {
-      final String message = "file not writable";
-      getLog().error(message);
-      throw new MojoExecutionException(message);
+    /**
+     * Checks {@code file}
+     *
+     * @throws MojoExecutionException
+     *             if {@code !file.exists || !file.canWrite}
+     * @since 1
+     */
+    void check() throws MojoExecutionException {
+        if (!file.exists()) {
+            final String message = "file does not exist";
+            getLog().error(message);
+            throw new MojoExecutionException(message);
+        } else if (!file.canWrite()) {
+            final String message = "file not writable";
+            getLog().error(message);
+            throw new MojoExecutionException(message);
+        }
     }
-  }
 
-  /**
-   * {@inheritDoc}
-   *
-   * @since 1
-   */
-  @Override
-  public String toString() {
-    return MoreObjects.toStringHelper(this).add("file", file).toString();
-  }
+    /**
+     * {@inheritDoc}
+     *
+     * @since 1
+     */
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this).add("file", file).toString();
+    }
 
-  @VisibleForTesting
-  File getFile() {
-    return file;
-  }
+    @VisibleForTesting
+    File getFile() {
+        return file;
+    }
 
-  @VisibleForTesting
-  void setFile(final File file) {
-    assert file != null;
-    this.file = file;
-  }
+    @VisibleForTesting
+    void setFile(final File file) {
+        assert file != null;
+        this.file = file;
+    }
 }

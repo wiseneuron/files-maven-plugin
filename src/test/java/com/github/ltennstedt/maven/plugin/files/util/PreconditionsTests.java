@@ -29,74 +29,74 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class PreconditionsTests {
-  private static final File testarea = new File("testarea");
-  private final CopyMojo mojo = new CopyMojo();
+    private static final File testarea = new File("testarea");
+    private final CopyMojo mojo = new CopyMojo();
 
-  @BeforeAll
-  public static void setUpAll() throws IOException {
-    testarea.mkdir();
-    FileUtils.copyDirectoryToDirectory(new File("src/test/resources/check"), testarea);
-  }
+    @BeforeAll
+    public static void setUpAll() throws IOException {
+        testarea.mkdir();
+        FileUtils.copyDirectoryToDirectory(new File("src/test/resources/check"), testarea);
+    }
 
-  @Test
-  public void checkFileFileIsNullShouldThrowException() {
-    assertThatThrownBy(() -> Preconditions.checkFile(null, mojo.getLog()))
-      .isExactlyInstanceOf(NullPointerException.class).hasMessage("file");
-  }
+    @Test
+    public void checkFileFileIsNullShouldThrowException() {
+        assertThatThrownBy(() -> Preconditions.checkFile(null, mojo.getLog()))
+            .isExactlyInstanceOf(NullPointerException.class).hasMessage("file");
+    }
 
-  @Test
-  public void checkFileLogIsNullShouldThrowException() {
-    assertThatThrownBy(() -> Preconditions.checkFile(new File(StringUtils.EMPTY), null))
-      .isExactlyInstanceOf(NullPointerException.class).hasMessage("log");
-  }
+    @Test
+    public void checkFileLogIsNullShouldThrowException() {
+        assertThatThrownBy(() -> Preconditions.checkFile(new File(StringUtils.EMPTY), null))
+            .isExactlyInstanceOf(NullPointerException.class).hasMessage("log");
+    }
 
-  @Test
-  public void checkFileDoesNotExistShouldThrowException() {
-    mojo.setFile(new File("nonExistingFile"));
-    assertThatThrownBy(() -> Preconditions.checkFile(mojo.getFile(), mojo.getLog()))
-      .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("file does not exist");
-  }
+    @Test
+    public void checkFileDoesNotExistShouldThrowException() {
+        mojo.setFile(new File("nonExistingFile"));
+        assertThatThrownBy(() -> Preconditions.checkFile(mojo.getFile(), mojo.getLog()))
+            .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("file does not exist");
+    }
 
-  @Test
-  public void checkFileNotReadableShouldThrowException() {
-    final File file = new File("testarea/check/notReadableFile.txt");
-    file.setReadable(false);
-    mojo.setFile(file);
-    assertThatThrownBy(() -> Preconditions.checkFile(mojo.getFile(), mojo.getLog()))
-      .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("file not readable");
-  }
+    @Test
+    public void checkFileNotReadableShouldThrowException() {
+        final File file = new File("testarea/check/notReadableFile.txt");
+        file.setReadable(false);
+        mojo.setFile(file);
+        assertThatThrownBy(() -> Preconditions.checkFile(mojo.getFile(), mojo.getLog()))
+            .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("file not readable");
+    }
 
-  @Test
-  public void checkIntoIntoIsNullShouldThrowException() {
-    assertThatThrownBy(() -> Preconditions.checkInto(null, mojo.getLog()))
-      .isExactlyInstanceOf(NullPointerException.class).hasMessage("into");
-  }
+    @Test
+    public void checkIntoIntoIsNullShouldThrowException() {
+        assertThatThrownBy(() -> Preconditions.checkInto(null, mojo.getLog()))
+            .isExactlyInstanceOf(NullPointerException.class).hasMessage("into");
+    }
 
-  @Test
-  public void checkIntoLogIsNullShouldThrowException() {
-    assertThatThrownBy(() -> Preconditions.checkInto(new File(StringUtils.EMPTY), null))
-      .isExactlyInstanceOf(NullPointerException.class).hasMessage("log");
-  }
+    @Test
+    public void checkIntoLogIsNullShouldThrowException() {
+        assertThatThrownBy(() -> Preconditions.checkInto(new File(StringUtils.EMPTY), null))
+            .isExactlyInstanceOf(NullPointerException.class).hasMessage("log");
+    }
 
-  @Test
-  public void checkIntoIsFileShouldThrowException() {
-    mojo.setInto(new File("testarea/check/intoFile.txt"));
-    assertThatThrownBy(() -> Preconditions.checkInto(mojo.getInto(), mojo.getLog()))
-      .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("into is a file");
-  }
+    @Test
+    public void checkIntoIsFileShouldThrowException() {
+        mojo.setInto(new File("testarea/check/intoFile.txt"));
+        assertThatThrownBy(() -> Preconditions.checkInto(mojo.getInto(), mojo.getLog()))
+            .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("into is a file");
+    }
 
-  @Test
-  public void checkIntoNotWrtitableShouldThrowException() {
-    final File into = new File("testarea/check/notWritableDir");
-    into.setWritable(false);
-    mojo.setInto(into);
-    assertThatThrownBy(() -> Preconditions.checkInto(mojo.getInto(), mojo.getLog()))
-      .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("into not writable");
-  }
+    @Test
+    public void checkIntoNotWrtitableShouldThrowException() {
+        final File into = new File("testarea/check/notWritableDir");
+        into.setWritable(false);
+        mojo.setInto(into);
+        assertThatThrownBy(() -> Preconditions.checkInto(mojo.getInto(), mojo.getLog()))
+            .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("into not writable");
+    }
 
-  @AfterAll
-  public static void cleanUpAll() throws IOException {
-    new File("testarea/check/notWritableDir").setWritable(true);
-    FileUtils.deleteDirectory(testarea);
-  }
+    @AfterAll
+    public static void cleanUpAll() throws IOException {
+        new File("testarea/check/notWritableDir").setWritable(true);
+        FileUtils.deleteDirectory(testarea);
+    }
 }

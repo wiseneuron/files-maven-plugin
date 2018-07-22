@@ -31,60 +31,60 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public final class MoveMojoTests {
-  private static final File testarea = new File("testarea");
-  private MoveMojo mojo;
+    private static final File testarea = new File("testarea");
+    private MoveMojo mojo;
 
-  @BeforeAll
-  public static void setUpAll() throws IOException {
-    testarea.mkdir();
-    FileUtils.copyDirectoryToDirectory(new File("src/test/resources/move"), testarea);
-  }
+    @BeforeAll
+    public static void setUpAll() throws IOException {
+        testarea.mkdir();
+        FileUtils.copyDirectoryToDirectory(new File("src/test/resources/move"), testarea);
+    }
 
-  @BeforeEach
-  public void setUpEach() {
-    mojo = new MoveMojo();
-  }
+    @BeforeEach
+    public void setUpEach() {
+        mojo = new MoveMojo();
+    }
 
-  @Test
-  public void executeFileShouldSucceed() throws MojoFailureException, MojoExecutionException {
-    final File file = new File("testarea/move/fileToMove.txt");
-    mojo.setFile(file);
-    mojo.setInto(new File("testarea/into"));
-    mojo.execute();
-    assertThat(new File("testarea/into/fileToMove.txt")).isFile()
-      .hasSameContentAs(new File("src/test/resources/move/fileToMove.txt"));
-    assertThat(file).doesNotExist();
-  }
+    @Test
+    public void executeFileShouldSucceed() throws MojoFailureException, MojoExecutionException {
+        final File file = new File("testarea/move/fileToMove.txt");
+        mojo.setFile(file);
+        mojo.setInto(new File("testarea/into"));
+        mojo.execute();
+        assertThat(new File("testarea/into/fileToMove.txt")).isFile()
+            .hasSameContentAs(new File("src/test/resources/move/fileToMove.txt"));
+        assertThat(file).doesNotExist();
+    }
 
-  @Test
-  public void executeDirShouldSucceed() throws MojoFailureException, MojoExecutionException {
-    final File file = new File("testarea/move/dirToMove");
-    mojo.setFile(file);
-    mojo.setInto(new File("testarea/into"));
-    mojo.execute();
-    assertThat(new File("testarea/into")).isDirectory();
-    assertThat(new File("testarea/into/subdir/file.txt"))
-      .hasSameContentAs(new File("src/test/resources/copy/dirToCopy/subdir/file.txt"));
-    assertThat(new File("testarea/into/file.txt"))
-      .hasSameContentAs(new File("src/test/resources/copy/dirToCopy/file.txt"));
-    assertThat(file).doesNotExist();
-  }
+    @Test
+    public void executeDirShouldSucceed() throws MojoFailureException, MojoExecutionException {
+        final File file = new File("testarea/move/dirToMove");
+        mojo.setFile(file);
+        mojo.setInto(new File("testarea/into"));
+        mojo.execute();
+        assertThat(new File("testarea/into")).isDirectory();
+        assertThat(new File("testarea/into/subdir/file.txt"))
+            .hasSameContentAs(new File("src/test/resources/copy/dirToCopy/subdir/file.txt"));
+        assertThat(new File("testarea/into/file.txt"))
+            .hasSameContentAs(new File("src/test/resources/copy/dirToCopy/file.txt"));
+        assertThat(file).doesNotExist();
+    }
 
-  @Test
-  public void toStringShouldSucceed() {
-    mojo.setFile(new File("testarea/move/fileToMove.txt"));
-    mojo.setInto(new File("testarea/into"));
-    assertThat(mojo.toString())
-      .isEqualTo(MoreObjects.toStringHelper(mojo).add("file", mojo.getFile()).add("into", mojo.getInto()).toString());
-  }
+    @Test
+    public void toStringShouldSucceed() {
+        mojo.setFile(new File("testarea/move/fileToMove.txt"));
+        mojo.setInto(new File("testarea/into"));
+        assertThat(mojo.toString()).isEqualTo(
+            MoreObjects.toStringHelper(mojo).add("file", mojo.getFile()).add("into", mojo.getInto()).toString());
+    }
 
-  @AfterEach
-  public void cleanUpEach() throws IOException {
-    FileUtils.deleteDirectory(new File("testarea/into"));
-  }
+    @AfterEach
+    public void cleanUpEach() throws IOException {
+        FileUtils.deleteDirectory(new File("testarea/into"));
+    }
 
-  @AfterAll
-  public static void cleanUpAll() throws IOException {
-    FileUtils.deleteDirectory(testarea);
-  }
+    @AfterAll
+    public static void cleanUpAll() throws IOException {
+        FileUtils.deleteDirectory(testarea);
+    }
 }
