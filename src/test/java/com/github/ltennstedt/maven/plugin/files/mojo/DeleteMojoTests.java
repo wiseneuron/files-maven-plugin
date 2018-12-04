@@ -66,7 +66,7 @@ public final class DeleteMojoTests {
     public void checkFileDoesNotExistShouldThrowException() {
         mojo.setFile(new File("nonExistingFile"));
         assertThatThrownBy(() -> mojo.check()).isExactlyInstanceOf(MojoExecutionException.class)
-            .hasMessage("file does not exist");
+                .hasMessage("file does not exist");
     }
 
     @Test
@@ -75,7 +75,7 @@ public final class DeleteMojoTests {
         file.setWritable(false);
         mojo.setFile(file);
         assertThatThrownBy(() -> mojo.check()).isExactlyInstanceOf(MojoExecutionException.class)
-            .hasMessage("file not writable");
+                .hasMessage("file not writable");
     }
 
     @Test

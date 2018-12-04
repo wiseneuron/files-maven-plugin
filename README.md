@@ -105,7 +105,7 @@ pom.xml
 
 #### Prerequisites
 * JDK
-* Maven
+* Maven 3.6
 * Git (optional)
 #
     git clone https://github.com/ltennstedt/files-maven-plugin.git
@@ -139,8 +139,7 @@ friendly.
 
 ## Thanks to
 * Oracle for the JVM, Java and OpenJDK
-* JetBrains for IntelliJ IDEA Community Edition
-* Google for Error Prone
+* Google for Guava
 * the Apache Software Foundation for Maven, Commons Lang, Commons IO and the Apache License
 * Joel Costigliola for AssertJ
 * the JUnit team for JUnit
@@ -154,4 +153,3 @@ friendly.
 * Codecov for Codecov
 * Stack Exchange for Stack Overflow
 * Shields.io for Shields.io
-* Judd Vinet and Aaron Griffin for Arch Linux

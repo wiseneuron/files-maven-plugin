@@ -38,15 +38,15 @@ public final class Preconditions {
      * Checks {@code file}
      *
      * @param file
-     *            {@code file}
+     *     {@code file}
      * @param log
-     *            {@link Log}
+     *     {@link Log}
      * @throws MojoExecutionException
-     *             if {@code !file.exists || !file.canRead}
+     *     if {@code !file.exists || !file.canRead}
      * @throws NullPointerException
-     *             if {@code file == null}
+     *     if {@code file == null}
      * @throws NullPointerException
-     *             if {@code log == null}
+     *     if {@code log == null}
      * @since 1
      */
     public static void checkFile(final File file, final Log log) throws MojoExecutionException {
@@ -67,15 +67,15 @@ public final class Preconditions {
      * Checks {@code into}
      *
      * @param into
-     *            {@code into}
+     *     {@code into}
      * @param log
-     *            {@link Log}
+     *     {@link Log}
      * @throws MojoExecutionException
-     *             if {@code into.isFile || !into.canWrite}
+     *     if {@code into.isFile || !into.canWrite}
      * @throws NullPointerException
-     *             if {@code into == null}
+     *     if {@code into == null}
      * @throws NullPointerException
-     *             if {@code log == null}
+     *     if {@code log == null}
      * @since 1
      */
     public static void checkInto(final File into, final Log log) throws MojoExecutionException {

@@ -62,9 +62,9 @@ public final class CopyMojoTests {
         mojo.execute();
         assertThat(new File("testarea/into")).isDirectory();
         assertThat(new File("testarea/into/subdir/file.txt"))
-            .hasSameContentAs(new File("src/test/resources/copy/dirToCopy/subdir/file.txt"));
+                .hasSameContentAs(new File("src/test/resources/copy/dirToCopy/subdir/file.txt"));
         assertThat(new File("testarea/into/file.txt"))
-            .hasSameContentAs(new File("src/test/resources/copy/dirToCopy/file.txt"));
+                .hasSameContentAs(new File("src/test/resources/copy/dirToCopy/file.txt"));
         assertThat(file).isDirectory();
         assertThat(new File("testarea/copy/dirToCopy/subdir")).isDirectory();
     }
@@ -74,7 +74,7 @@ public final class CopyMojoTests {
         mojo.setFile(new File("testarea/copy/fileToCopy.txt"));
         mojo.setInto(new File("testarea/into"));
         assertThat(mojo.toString()).isEqualTo(
-            MoreObjects.toStringHelper(mojo).add("file", mojo.getFile()).add("into", mojo.getInto()).toString());
+                MoreObjects.toStringHelper(mojo).add("file", mojo.getFile()).add("into", mojo.getInto()).toString());
     }
 
     @AfterEach

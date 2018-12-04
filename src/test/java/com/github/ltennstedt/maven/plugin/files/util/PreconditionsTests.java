@@ -41,20 +41,20 @@ public class PreconditionsTests {
     @Test
     public void checkFileFileIsNullShouldThrowException() {
         assertThatThrownBy(() -> Preconditions.checkFile(null, mojo.getLog()))
-            .isExactlyInstanceOf(NullPointerException.class).hasMessage("file");
+                .isExactlyInstanceOf(NullPointerException.class).hasMessage("file");
     }
 
     @Test
     public void checkFileLogIsNullShouldThrowException() {
         assertThatThrownBy(() -> Preconditions.checkFile(new File(StringUtils.EMPTY), null))
-            .isExactlyInstanceOf(NullPointerException.class).hasMessage("log");
+                .isExactlyInstanceOf(NullPointerException.class).hasMessage("log");
     }
 
     @Test
     public void checkFileDoesNotExistShouldThrowException() {
         mojo.setFile(new File("nonExistingFile"));
         assertThatThrownBy(() -> Preconditions.checkFile(mojo.getFile(), mojo.getLog()))
-            .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("file does not exist");
+                .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("file does not exist");
     }
 
     @Test
@@ -63,26 +63,26 @@ public class PreconditionsTests {
         file.setReadable(false);
         mojo.setFile(file);
         assertThatThrownBy(() -> Preconditions.checkFile(mojo.getFile(), mojo.getLog()))
-            .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("file not readable");
+                .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("file not readable");
     }
 
     @Test
     public void checkIntoIntoIsNullShouldThrowException() {
         assertThatThrownBy(() -> Preconditions.checkInto(null, mojo.getLog()))
-            .isExactlyInstanceOf(NullPointerException.class).hasMessage("into");
+                .isExactlyInstanceOf(NullPointerException.class).hasMessage("into");
     }
 
     @Test
     public void checkIntoLogIsNullShouldThrowException() {
         assertThatThrownBy(() -> Preconditions.checkInto(new File(StringUtils.EMPTY), null))
-            .isExactlyInstanceOf(NullPointerException.class).hasMessage("log");
+                .isExactlyInstanceOf(NullPointerException.class).hasMessage("log");
     }
 
     @Test
     public void checkIntoIsFileShouldThrowException() {
         mojo.setInto(new File("testarea/check/intoFile.txt"));
         assertThatThrownBy(() -> Preconditions.checkInto(mojo.getInto(), mojo.getLog()))
-            .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("into is a file");
+                .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("into is a file");
     }
 
     @Test
@@ -91,7 +91,7 @@ public class PreconditionsTests {
         into.setWritable(false);
         mojo.setInto(into);
         assertThatThrownBy(() -> Preconditions.checkInto(mojo.getInto(), mojo.getLog()))
-            .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("into not writable");
+                .isExactlyInstanceOf(MojoExecutionException.class).hasMessage("into not writable");
     }
 
     @AfterAll
