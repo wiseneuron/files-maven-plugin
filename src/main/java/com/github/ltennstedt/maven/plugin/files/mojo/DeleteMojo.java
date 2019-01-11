@@ -73,8 +73,7 @@ public final class DeleteMojo extends AbstractMojo {
     /**
      * Checks {@code file}
      *
-     * @throws MojoExecutionException
-     *     if {@code !file.exists || !file.canWrite}
+     * @throws MojoExecutionException if {@code !file.exists || !file.canWrite}
      * @since 1
      */
     void check() throws MojoExecutionException {
