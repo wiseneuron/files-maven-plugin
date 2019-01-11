@@ -37,62 +37,52 @@ public final class Preconditions {
     /**
      * Checks {@code file}
      *
-     * @param file
-     *     {@code file}
-     * @param log
-     *     {@link Log}
-     * @throws MojoExecutionException
-     *     if {@code !file.exists || !file.canRead}
-     * @throws NullPointerException
-     *     if {@code file == null}
-     * @throws NullPointerException
-     *     if {@code log == null}
+     * @param file {@code file}
+     * @param log {@link Log}
+     * @throws MojoExecutionException if {@code !file.exists || !file.canRead}
+     * @throws NullPointerException if {@code file == null}
+     * @throws NullPointerException if {@code log == null}
      * @since 1
      */
     public static void checkFile(final File file, final Log log) throws MojoExecutionException {
-<span class="fc" id="L53">        requireNonNull(file, &quot;file&quot;);</span>
-<span class="fc" id="L54">        requireNonNull(log, &quot;log&quot;);</span>
-<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (!file.exists()) {</span>
-<span class="fc" id="L56">            final String message = &quot;file does not exist&quot;;</span>
-<span class="fc" id="L57">            log.error(message);</span>
-<span class="fc" id="L58">            throw new MojoExecutionException(message);</span>
-<span class="fc bfc" id="L59" title="All 2 branches covered.">        } else if (!file.canRead()) {</span>
-<span class="fc" id="L60">            final String message = &quot;file not readable&quot;;</span>
-<span class="fc" id="L61">            log.error(message);</span>
-<span class="fc" id="L62">            throw new MojoExecutionException(message);</span>
+<span class="fc" id="L48">        requireNonNull(file, &quot;file&quot;);</span>
+<span class="fc" id="L49">        requireNonNull(log, &quot;log&quot;);</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (!file.exists()) {</span>
+<span class="fc" id="L51">            final String message = &quot;file does not exist&quot;;</span>
+<span class="fc" id="L52">            log.error(message);</span>
+<span class="fc" id="L53">            throw new MojoExecutionException(message);</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        } else if (!file.canRead()) {</span>
+<span class="fc" id="L55">            final String message = &quot;file not readable&quot;;</span>
+<span class="fc" id="L56">            log.error(message);</span>
+<span class="fc" id="L57">            throw new MojoExecutionException(message);</span>
         }
-<span class="fc" id="L64">    }</span>
+<span class="fc" id="L59">    }</span>
 
     /**
      * Checks {@code into}
      *
-     * @param into
-     *     {@code into}
-     * @param log
-     *     {@link Log}
-     * @throws MojoExecutionException
-     *     if {@code into.isFile || !into.canWrite}
-     * @throws NullPointerException
-     *     if {@code into == null}
-     * @throws NullPointerException
-     *     if {@code log == null}
+     * @param into {@code into}
+     * @param log {@link Log}
+     * @throws MojoExecutionException if {@code into.isFile || !into.canWrite}
+     * @throws NullPointerException if {@code into == null}
+     * @throws NullPointerException if {@code log == null}
      * @since 1
      */
     public static void checkInto(final File into, final Log log) throws MojoExecutionException {
-<span class="fc" id="L82">        requireNonNull(into, &quot;into&quot;);</span>
-<span class="fc" id="L83">        requireNonNull(log, &quot;log&quot;);</span>
-<span class="fc bfc" id="L84" title="All 2 branches covered.">        if (into.exists()) {</span>
-<span class="fc bfc" id="L85" title="All 2 branches covered.">            if (into.isFile()) {</span>
-<span class="fc" id="L86">                final String message = &quot;into is a file&quot;;</span>
-<span class="fc" id="L87">                log.error(message);</span>
-<span class="fc" id="L88">                throw new MojoExecutionException(message);</span>
+<span class="fc" id="L72">        requireNonNull(into, &quot;into&quot;);</span>
+<span class="fc" id="L73">        requireNonNull(log, &quot;log&quot;);</span>
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        if (into.exists()) {</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">            if (into.isFile()) {</span>
+<span class="fc" id="L76">                final String message = &quot;into is a file&quot;;</span>
+<span class="fc" id="L77">                log.error(message);</span>
+<span class="fc" id="L78">                throw new MojoExecutionException(message);</span>
             }
-<span class="pc bpc" id="L90" title="1 of 2 branches missed.">            if (!into.canWrite()) {</span>
-<span class="fc" id="L91">                final String message = &quot;into not writable&quot;;</span>
-<span class="fc" id="L92">                log.error(message);</span>
-<span class="fc" id="L93">                throw new MojoExecutionException(message);</span>
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">            if (!into.canWrite()) {</span>
+<span class="fc" id="L81">                final String message = &quot;into not writable&quot;;</span>
+<span class="fc" id="L82">                log.error(message);</span>
+<span class="fc" id="L83">                throw new MojoExecutionException(message);</span>
             }
         }
-<span class="fc" id="L96">    }</span>
+<span class="fc" id="L86">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
