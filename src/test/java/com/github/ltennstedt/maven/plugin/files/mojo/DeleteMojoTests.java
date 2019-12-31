@@ -48,7 +48,7 @@ public final class DeleteMojoTests {
 
     @Test
     public void executeFileShouldSucceed() throws MojoFailureException, MojoExecutionException {
-        final File file = new File("testarea/delete/fileToDelete.txt");
+        final var file = new File("testarea/delete/fileToDelete.txt");
         mojo.setFile(file);
         mojo.execute();
         assertThat(file).doesNotExist();
@@ -56,7 +56,7 @@ public final class DeleteMojoTests {
 
     @Test
     public void executeDirShouldSucceed() throws MojoFailureException, MojoExecutionException {
-        final File file = new File("testarea/delete/dirToDelete");
+        final var file = new File("testarea/delete/dirToDelete");
         mojo.setFile(file);
         mojo.execute();
         assertThat(file).doesNotExist();
@@ -71,7 +71,7 @@ public final class DeleteMojoTests {
 
     @Test
     public void checkFileNotReadableShouldThrowException() {
-        final File file = new File("testarea/check/notReadableFile.txt");
+        final var file = new File("testarea/check/notReadableFile.txt");
         file.setWritable(false);
         mojo.setFile(file);
         assertThatThrownBy(() -> mojo.check()).isExactlyInstanceOf(MojoExecutionException.class)

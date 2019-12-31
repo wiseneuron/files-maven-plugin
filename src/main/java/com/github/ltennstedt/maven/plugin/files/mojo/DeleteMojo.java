@@ -54,7 +54,7 @@ public final class DeleteMojo extends AbstractMojo {
         getLog().info("Deleting " + file.getAbsolutePath());
         if (file.isFile()) {
             if (!file.delete()) {
-                final String message = "Deletion failed";
+                final var message = "Deletion failed";
                 getLog().error(message);
                 throw new MojoExecutionException(message);
             }
@@ -62,7 +62,7 @@ public final class DeleteMojo extends AbstractMojo {
             try {
                 FileUtils.deleteDirectory(file);
             } catch (final IOException exception) {
-                final String message = "Deletion failed";
+                final var message = "Deletion failed";
                 getLog().error(message);
                 throw new MojoExecutionException(message, exception);
             }
@@ -78,11 +78,11 @@ public final class DeleteMojo extends AbstractMojo {
      */
     void check() throws MojoExecutionException {
         if (!file.exists()) {
-            final String message = "file does not exist";
+            final var message = "file does not exist";
             getLog().error(message);
             throw new MojoExecutionException(message);
         } else if (!file.canWrite()) {
-            final String message = "file not writable";
+            final var message = "file not writable";
             getLog().error(message);
             throw new MojoExecutionException(message);
         }

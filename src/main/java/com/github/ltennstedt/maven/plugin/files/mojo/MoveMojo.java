@@ -73,7 +73,7 @@ public final class MoveMojo extends AbstractMojo {
                 FileUtils.deleteDirectory(file);
             }
         } catch (final IOException exception) {
-            final String message = "Moving failed";
+            final var message = "Moving failed";
             getLog().error(message);
             throw new MojoExecutionException(message, exception);
         }

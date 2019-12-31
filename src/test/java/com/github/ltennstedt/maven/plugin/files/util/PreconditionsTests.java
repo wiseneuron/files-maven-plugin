@@ -59,7 +59,7 @@ public class PreconditionsTests {
 
     @Test
     public void checkFileNotReadableShouldThrowException() {
-        final File file = new File("testarea/check/notReadableFile.txt");
+        final var file = new File("testarea/check/notReadableFile.txt");
         file.setReadable(false);
         mojo.setFile(file);
         assertThatThrownBy(() -> Preconditions.checkFile(mojo.getFile(), mojo.getLog()))
@@ -87,7 +87,7 @@ public class PreconditionsTests {
 
     @Test
     public void checkIntoNotWrtitableShouldThrowException() {
-        final File into = new File("testarea/check/notWritableDir");
+        final var into = new File("testarea/check/notWritableDir");
         into.setWritable(false);
         mojo.setInto(into);
         assertThatThrownBy(() -> Preconditions.checkInto(mojo.getInto(), mojo.getLog()))

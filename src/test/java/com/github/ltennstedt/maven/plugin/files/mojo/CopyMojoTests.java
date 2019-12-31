@@ -47,7 +47,7 @@ public final class CopyMojoTests {
 
     @Test
     public void executeFileShouldSucceed() throws MojoFailureException, MojoExecutionException {
-        final File file = new File("testarea/copy/fileToCopy.txt");
+        final var file = new File("testarea/copy/fileToCopy.txt");
         mojo.setFile(file);
         mojo.setInto(new File("testarea/into"));
         mojo.execute();
@@ -56,7 +56,7 @@ public final class CopyMojoTests {
 
     @Test
     public void executeDirShouldSucceed() throws MojoFailureException, MojoExecutionException {
-        final File file = new File("testarea/copy/dirToCopy");
+        final var file = new File("testarea/copy/dirToCopy");
         mojo.setFile(file);
         mojo.setInto(new File("testarea/into"));
         mojo.execute();

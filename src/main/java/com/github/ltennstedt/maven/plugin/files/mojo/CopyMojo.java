@@ -73,7 +73,7 @@ public final class CopyMojo extends AbstractMojo {
                 FileUtils.copyDirectory(file, into);
             }
         } catch (final IOException exception) {
-            final String message = "Copying failed";
+            final var message = "Copying failed";
             getLog().error(message);
             throw new MojoExecutionException(message, exception);
         }

@@ -48,11 +48,11 @@ public final class Preconditions {
         requireNonNull(file, "file");
         requireNonNull(log, "log");
         if (!file.exists()) {
-            final String message = "file does not exist";
+            final var message = "file does not exist";
             log.error(message);
             throw new MojoExecutionException(message);
         } else if (!file.canRead()) {
-            final String message = "file not readable";
+            final var message = "file not readable";
             log.error(message);
             throw new MojoExecutionException(message);
         }
@@ -73,12 +73,12 @@ public final class Preconditions {
         requireNonNull(log, "log");
         if (into.exists()) {
             if (into.isFile()) {
-                final String message = "into is a file";
+                final var message = "into is a file";
                 log.error(message);
                 throw new MojoExecutionException(message);
             }
             if (!into.canWrite()) {
-                final String message = "into not writable";
+                final var message = "into not writable";
                 log.error(message);
                 throw new MojoExecutionException(message);
             }
