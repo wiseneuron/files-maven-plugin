@@ -22,7 +22,7 @@ What files-maven-plugin will NOT provide:
 The files-maven-plugin is written in Java, is very simplistic and does not very much.
 
 ## Implementation details
-* Java 8
+* Java 11
 * All leaf classes are final.
 * Useful toString methods
 
@@ -104,7 +104,7 @@ pom.xml
 ## Building
 
 #### Prerequisites
-* JDK
+* JDK 11
 * Maven 3.6
 * Git (optional)
 #
