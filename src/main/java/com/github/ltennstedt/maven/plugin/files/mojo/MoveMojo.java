@@ -33,7 +33,7 @@ import org.apache.maven.plugins.annotations.Parameter;
  * Mojo for moving files and directories
  *
  * @author Lars Tennstedt
- * @since 1
+ * @since 0.0.1
  */
 @Beta
 @Mojo(name = "move")
@@ -41,7 +41,7 @@ public final class MoveMojo extends AbstractMojo {
     /**
      * Source file or directory
      *
-     * @since 1
+     * @since 0.0.1
      */
     @Parameter(required = true)
     private File file;
@@ -49,7 +49,7 @@ public final class MoveMojo extends AbstractMojo {
     /**
      * Target directory
      *
-     * @since 1
+     * @since 0.0.1
      */
     @Parameter(required = true)
     private File into;
@@ -57,7 +57,7 @@ public final class MoveMojo extends AbstractMojo {
     /**
      * {@inheritDoc}
      *
-     * @since 1
+     * @since 0.0.1
      */
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -83,7 +83,7 @@ public final class MoveMojo extends AbstractMojo {
     /**
      * {@inheritDoc}
      *
-     * @since 1
+     * @since 0.0.1
      */
     @Override
     public String toString() {

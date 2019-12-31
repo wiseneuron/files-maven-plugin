@@ -16,6 +16,8 @@
 
 package com.github.ltennstedt.maven.plugin.files.mojo;
 
+import static java.util.Objects.requireNonNull;
+
 import com.github.ltennstedt.maven.plugin.files.util.Preconditions;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.VisibleForTesting;
@@ -33,7 +35,7 @@ import org.apache.maven.plugins.annotations.Parameter;
  * Mojo for copying files and directories
  *
  * @author Lars Tennstedt
- * @since 1
+ * @since 0.0.1
  */
 @Beta
 @Mojo(name = "copy")
@@ -41,7 +43,7 @@ public final class CopyMojo extends AbstractMojo {
     /**
      * Source file or directory
      *
-     * @since 1
+     * @since 0.0.1
      */
     @Parameter(required = true)
     private File file;
@@ -49,7 +51,7 @@ public final class CopyMojo extends AbstractMojo {
     /**
      * Target directory
      *
-     * @since 1
+     * @since 0.0.1
      */
     @Parameter(required = true)
     private File into;
@@ -57,7 +59,7 @@ public final class CopyMojo extends AbstractMojo {
     /**
      * {@inheritDoc}
      *
-     * @since 1
+     * @since 0.0.1
      */
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -81,7 +83,7 @@ public final class CopyMojo extends AbstractMojo {
     /**
      * {@inheritDoc}
      *
-     * @since 1
+     * @since 0.0.1
      */
     @Override
     public String toString() {
@@ -95,7 +97,7 @@ public final class CopyMojo extends AbstractMojo {
 
     @VisibleForTesting
     public void setFile(final File file) {
-        assert file != null;
+        requireNonNull(file, "file");
         this.file = file;
     }
 
@@ -106,7 +108,7 @@ public final class CopyMojo extends AbstractMojo {
 
     @VisibleForTesting
     public void setInto(final File into) {
-        assert into != null;
+        requireNonNull(into, "into");
         this.into = into;
     }
 }

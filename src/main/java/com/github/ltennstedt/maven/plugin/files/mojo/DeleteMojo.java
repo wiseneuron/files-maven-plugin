@@ -32,7 +32,7 @@ import org.apache.maven.plugins.annotations.Parameter;
  * Mojo for deleting files and directories
  *
  * @author Lars Tennstedt
- * @since 1
+ * @since 0.0.1
  */
 @Beta
 @Mojo(name = "delete")
@@ -46,7 +46,7 @@ public final class DeleteMojo extends AbstractMojo {
     /**
      * {@inheritDoc}
      *
-     * @since 1
+     * @since 0.0.1
      */
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -74,7 +74,7 @@ public final class DeleteMojo extends AbstractMojo {
      * Checks {@code file}
      *
      * @throws MojoExecutionException if {@code !file.exists || !file.canWrite}
-     * @since 1
+     * @since 0.0.1
      */
     void check() throws MojoExecutionException {
         if (!file.exists()) {
@@ -91,7 +91,7 @@ public final class DeleteMojo extends AbstractMojo {
     /**
      * {@inheritDoc}
      *
-     * @since 1
+     * @since 0.0.1
      */
     @Override
     public String toString() {
