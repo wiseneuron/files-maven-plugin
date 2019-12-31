@@ -47,19 +47,29 @@ public final class CopyMojoTests {
 
     @Test
     public void executeFileShouldSucceed() throws MojoFailureException, MojoExecutionException {
+        // given
         final var file = new File("testarea/copy/fileToCopy.txt");
         mojo.setFile(file);
         mojo.setInto(new File("testarea/into"));
+
+        // when
         mojo.execute();
+
+        // then
         assertThat(new File("testarea/into/fileToCopy.txt")).isFile().hasSameContentAs(file);
     }
 
     @Test
     public void executeDirShouldSucceed() throws MojoFailureException, MojoExecutionException {
+        // given
         final var file = new File("testarea/copy/dirToCopy");
         mojo.setFile(file);
         mojo.setInto(new File("testarea/into"));
+
+        // when
         mojo.execute();
+
+        // then
         assertThat(new File("testarea/into")).isDirectory();
         assertThat(new File("testarea/into/subdir/file.txt"))
                 .hasSameContentAs(new File("src/test/resources/copy/dirToCopy/subdir/file.txt"));
@@ -71,10 +81,17 @@ public final class CopyMojoTests {
 
     @Test
     public void toStringShouldSucceed() {
+        // given
         mojo.setFile(new File("testarea/copy/fileToCopy.txt"));
         mojo.setInto(new File("testarea/into"));
-        assertThat(mojo.toString()).isEqualTo(
-                MoreObjects.toStringHelper(mojo).add("file", mojo.getFile()).add("into", mojo.getInto()).toString());
+
+        // when
+        final var actual = mojo.toString();
+
+        // then
+        final var expected =
+                MoreObjects.toStringHelper(mojo).add("file", mojo.getFile()).add("into", mojo.getInto()).toString();
+        assertThat(actual).isEqualTo(expected);
     }
 
     @AfterEach

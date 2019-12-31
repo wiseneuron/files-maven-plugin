@@ -17,7 +17,7 @@
 package com.github.ltennstedt.maven.plugin.files.mojo;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.catchThrowableOfType;
 
 import com.google.common.base.MoreObjects;
 import java.io.File;
@@ -48,40 +48,67 @@ public final class DeleteMojoTests {
 
     @Test
     public void executeFileShouldSucceed() throws MojoFailureException, MojoExecutionException {
+        // given
         final var file = new File("testarea/delete/fileToDelete.txt");
         mojo.setFile(file);
+
+        // when
         mojo.execute();
+
+        // then
         assertThat(file).doesNotExist();
     }
 
     @Test
     public void executeDirShouldSucceed() throws MojoFailureException, MojoExecutionException {
+        // given
         final var file = new File("testarea/delete/dirToDelete");
         mojo.setFile(file);
+
+        // when
         mojo.execute();
+
+        // then
         assertThat(file).doesNotExist();
     }
 
     @Test
     public void checkFileDoesNotExistShouldThrowException() {
+        // given
         mojo.setFile(new File("nonExistingFile"));
-        assertThatThrownBy(() -> mojo.check()).isExactlyInstanceOf(MojoExecutionException.class)
-                .hasMessage("file does not exist");
+
+        // when
+        final var actual = catchThrowableOfType(() -> mojo.check(), MojoExecutionException.class);
+
+        // then
+        assertThat(actual).hasMessage("file does not exist").hasNoCause();
     }
 
     @Test
     public void checkFileNotReadableShouldThrowException() {
+        // given
         final var file = new File("testarea/check/notReadableFile.txt");
         file.setWritable(false);
         mojo.setFile(file);
-        assertThatThrownBy(() -> mojo.check()).isExactlyInstanceOf(MojoExecutionException.class)
-                .hasMessage("file not writable");
+
+        // when
+        final var actual = catchThrowableOfType(() -> mojo.check(), MojoExecutionException.class);
+
+        // then
+        assertThat(actual).hasMessage("file not writable").hasNoCause();
     }
 
     @Test
     public void toStringShouldSucceed() {
+        // given
         mojo.setFile(new File("testarea/delete/fileToDelete.txt"));
-        assertThat(mojo.toString()).isEqualTo(MoreObjects.toStringHelper(mojo).add("file", mojo.getFile()).toString());
+
+        // when
+        final var actual = mojo.toString();
+
+        // then
+        final var expected = MoreObjects.toStringHelper(mojo).add("file", mojo.getFile()).toString();
+        assertThat(actual).isEqualTo(expected);
     }
 
     @AfterAll
