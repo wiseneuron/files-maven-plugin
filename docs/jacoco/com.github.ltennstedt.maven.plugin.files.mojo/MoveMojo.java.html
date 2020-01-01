@@ -33,7 +33,7 @@ import org.apache.maven.plugins.annotations.Parameter;
  * Mojo for moving files and directories
  *
  * @author Lars Tennstedt
- * @since 1
+ * @since 0.0.1
  */
 <span class="pc bpc" id="L38" title="1 of 2 branches missed.">@Beta</span>
 @Mojo(name = &quot;move&quot;)
@@ -41,7 +41,7 @@ import org.apache.maven.plugins.annotations.Parameter;
     /**
      * Source file or directory
      *
-     * @since 1
+     * @since 0.0.1
      */
     @Parameter(required = true)
     private File file;
@@ -49,7 +49,7 @@ import org.apache.maven.plugins.annotations.Parameter;
     /**
      * Target directory
      *
-     * @since 1
+     * @since 0.0.1
      */
     @Parameter(required = true)
     private File into;
@@ -57,7 +57,7 @@ import org.apache.maven.plugins.annotations.Parameter;
     /**
      * {@inheritDoc}
      *
-     * @since 1
+     * @since 0.0.1
      */
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -73,7 +73,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 <span class="fc" id="L73">                FileUtils.deleteDirectory(file);</span>
             }
 <span class="nc" id="L75">        } catch (final IOException exception) {</span>
-<span class="nc" id="L76">            final String message = &quot;Moving failed&quot;;</span>
+<span class="nc" id="L76">            final var message = &quot;Moving failed&quot;;</span>
 <span class="nc" id="L77">            getLog().error(message);</span>
 <span class="nc" id="L78">            throw new MojoExecutionException(message, exception);</span>
 <span class="fc" id="L79">        }</span>
@@ -83,7 +83,7 @@ import org.apache.maven.plugins.annotations.Parameter;
     /**
      * {@inheritDoc}
      *
-     * @since 1
+     * @since 0.0.1
      */
     @Override
     public String toString() {
@@ -112,4 +112,4 @@ import org.apache.maven.plugins.annotations.Parameter;
 <span class="fc" id="L112">        this.into = into;</span>
 <span class="fc" id="L113">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

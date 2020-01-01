@@ -32,7 +32,7 @@ import org.apache.maven.plugins.annotations.Parameter;
  * Mojo for deleting files and directories
  *
  * @author Lars Tennstedt
- * @since 1
+ * @since 0.0.1
  */
 <span class="pc bpc" id="L37" title="1 of 2 branches missed.">@Beta</span>
 @Mojo(name = &quot;delete&quot;)
@@ -46,7 +46,7 @@ import org.apache.maven.plugins.annotations.Parameter;
     /**
      * {@inheritDoc}
      *
-     * @since 1
+     * @since 0.0.1
      */
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
@@ -54,7 +54,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 <span class="fc" id="L54">        getLog().info(&quot;Deleting &quot; + file.getAbsolutePath());</span>
 <span class="fc bfc" id="L55" title="All 2 branches covered.">        if (file.isFile()) {</span>
 <span class="pc bpc" id="L56" title="1 of 2 branches missed.">            if (!file.delete()) {</span>
-<span class="nc" id="L57">                final String message = &quot;Deletion failed&quot;;</span>
+<span class="nc" id="L57">                final var message = &quot;Deletion failed&quot;;</span>
 <span class="nc" id="L58">                getLog().error(message);</span>
 <span class="nc" id="L59">                throw new MojoExecutionException(message);</span>
             }
@@ -62,7 +62,7 @@ import org.apache.maven.plugins.annotations.Parameter;
             try {
 <span class="fc" id="L63">                FileUtils.deleteDirectory(file);</span>
 <span class="nc" id="L64">            } catch (final IOException exception) {</span>
-<span class="nc" id="L65">                final String message = &quot;Deletion failed&quot;;</span>
+<span class="nc" id="L65">                final var message = &quot;Deletion failed&quot;;</span>
 <span class="nc" id="L66">                getLog().error(message);</span>
 <span class="nc" id="L67">                throw new MojoExecutionException(message, exception);</span>
 <span class="fc" id="L68">            }</span>
@@ -74,15 +74,15 @@ import org.apache.maven.plugins.annotations.Parameter;
      * Checks {@code file}
      *
      * @throws MojoExecutionException if {@code !file.exists || !file.canWrite}
-     * @since 1
+     * @since 0.0.1
      */
     void check() throws MojoExecutionException {
 <span class="fc bfc" id="L80" title="All 2 branches covered.">        if (!file.exists()) {</span>
-<span class="fc" id="L81">            final String message = &quot;file does not exist&quot;;</span>
+<span class="fc" id="L81">            final var message = &quot;file does not exist&quot;;</span>
 <span class="fc" id="L82">            getLog().error(message);</span>
 <span class="fc" id="L83">            throw new MojoExecutionException(message);</span>
 <span class="fc bfc" id="L84" title="All 2 branches covered.">        } else if (!file.canWrite()) {</span>
-<span class="fc" id="L85">            final String message = &quot;file not writable&quot;;</span>
+<span class="fc" id="L85">            final var message = &quot;file not writable&quot;;</span>
 <span class="fc" id="L86">            getLog().error(message);</span>
 <span class="fc" id="L87">            throw new MojoExecutionException(message);</span>
         }
@@ -91,7 +91,7 @@ import org.apache.maven.plugins.annotations.Parameter;
     /**
      * {@inheritDoc}
      *
-     * @since 1
+     * @since 0.0.1
      */
     @Override
     public String toString() {
@@ -109,4 +109,4 @@ import org.apache.maven.plugins.annotations.Parameter;
 <span class="fc" id="L109">        this.file = file;</span>
 <span class="fc" id="L110">    }</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
