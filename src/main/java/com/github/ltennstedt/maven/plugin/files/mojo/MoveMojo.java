@@ -16,13 +16,16 @@
 
 package com.github.ltennstedt.maven.plugin.files.mojo;
 
-import com.github.ltennstedt.maven.plugin.files.util.Preconditions;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.MoreObjects;
 import java.io.File;
 import java.io.IOException;
-import org.apache.commons.io.FileUtils;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.Comparator;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -61,18 +64,38 @@ public final class MoveMojo extends AbstractMojo {
      */
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        Preconditions.checkFile(file, getLog());
-        Preconditions.checkInto(into, getLog());
         getLog().info("Moving " + file.getAbsolutePath() + " into " + into.getAbsolutePath());
+        final var start = Path.of(file.getAbsolutePath());
+        final var target = Path.of(into.getAbsolutePath());
         try {
-            if (file.isFile()) {
-                FileUtils.copyFileToDirectory(file, into);
-                file.delete();
+            Files.createDirectories(target);
+            if (Files.isDirectory(start)) {
+                try (var walk = Files.walk(start)) {
+                    walk.forEach(w -> {
+                        try {
+                            if (Files.isDirectory(w)) {
+                                Files.copy(w, target.resolve(start.relativize(w)), StandardCopyOption.REPLACE_EXISTING);
+                            } else {
+                                Files.move(w, target.resolve(start.relativize(w)), StandardCopyOption.REPLACE_EXISTING);
+                            }
+                        } catch (final IOException exception) {
+                            throw new UncheckedIOException(exception);
+                        }
+                    });
+                }
+                try (var walk = Files.walk(Path.of(file.getAbsolutePath()))) {
+                    walk.sorted(Comparator.reverseOrder()).forEach(w -> {
+                        try {
+                            Files.delete(w);
+                        } catch (final IOException exception) {
+                            throw new UncheckedIOException(exception);
+                        }
+                    });
+                }
             } else {
-                FileUtils.copyDirectory(file, into);
-                FileUtils.deleteDirectory(file);
+                Files.move(start, target, StandardCopyOption.REPLACE_EXISTING);
             }
-        } catch (final IOException exception) {
+        } catch (final IOException | UncheckedIOException exception) {
             final var message = "Moving failed";
             getLog().error(message);
             throw new MojoExecutionException(message, exception);

@@ -17,7 +17,6 @@
 package com.github.ltennstedt.maven.plugin.files.mojo;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowableOfType;
 
 import com.google.common.base.MoreObjects;
 import java.io.File;
@@ -70,32 +69,6 @@ public final class DeleteMojoTests {
 
         // then
         assertThat(file).doesNotExist();
-    }
-
-    @Test
-    public void checkFileDoesNotExistShouldThrowException() {
-        // given
-        mojo.setFile(new File("nonExistingFile"));
-
-        // when
-        final var actual = catchThrowableOfType(() -> mojo.check(), MojoExecutionException.class);
-
-        // then
-        assertThat(actual).hasMessage("file does not exist").hasNoCause();
-    }
-
-    @Test
-    public void checkFileNotReadableShouldThrowException() {
-        // given
-        final var file = new File("testarea/check/notReadableFile.txt");
-        file.setWritable(false);
-        mojo.setFile(file);
-
-        // when
-        final var actual = catchThrowableOfType(() -> mojo.check(), MojoExecutionException.class);
-
-        // then
-        assertThat(actual).hasMessage("file not writable").hasNoCause();
     }
 
     @Test

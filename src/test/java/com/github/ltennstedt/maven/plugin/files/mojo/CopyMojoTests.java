@@ -50,13 +50,13 @@ public final class CopyMojoTests {
         // given
         final var file = new File("testarea/copy/fileToCopy.txt");
         mojo.setFile(file);
-        mojo.setInto(new File("testarea/into"));
+        mojo.setInto(new File("testarea/into/copiedFile.txt"));
 
         // when
         mojo.execute();
 
         // then
-        assertThat(new File("testarea/into/fileToCopy.txt")).isFile().hasSameContentAs(file);
+        assertThat(new File("testarea/into/copiedFile.txt")).hasSameContentAs(file);
     }
 
     @Test
@@ -70,7 +70,6 @@ public final class CopyMojoTests {
         mojo.execute();
 
         // then
-        assertThat(new File("testarea/into")).isDirectory();
         assertThat(new File("testarea/into/subdir/file.txt"))
                 .hasSameContentAs(new File("src/test/resources/copy/dirToCopy/subdir/file.txt"));
         assertThat(new File("testarea/into/file.txt"))

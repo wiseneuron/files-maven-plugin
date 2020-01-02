@@ -50,13 +50,13 @@ public final class MoveMojoTests {
         // given
         final var file = new File("testarea/move/fileToMove.txt");
         mojo.setFile(file);
-        mojo.setInto(new File("testarea/into"));
+        mojo.setInto(new File("testarea/into/movedFile.txt"));
 
         // when
         mojo.execute();
 
         // then
-        assertThat(new File("testarea/into/fileToMove.txt")).isFile()
+        assertThat(new File("testarea/into/movedFile.txt"))
                 .hasSameContentAs(new File("src/test/resources/move/fileToMove.txt"));
         assertThat(file).doesNotExist();
     }

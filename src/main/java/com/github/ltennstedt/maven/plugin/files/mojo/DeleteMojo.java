@@ -21,7 +21,10 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.MoreObjects;
 import java.io.File;
 import java.io.IOException;
-import org.apache.commons.io.FileUtils;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Comparator;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -50,42 +53,21 @@ public final class DeleteMojo extends AbstractMojo {
      */
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        check();
         getLog().info("Deleting " + file.getAbsolutePath());
-        if (file.isFile()) {
-            if (!file.delete()) {
-                final var message = "Deletion failed";
-                getLog().error(message);
-                throw new MojoExecutionException(message);
-            }
-        } else {
-            try {
-                FileUtils.deleteDirectory(file);
-            } catch (final IOException exception) {
-                final var message = "Deletion failed";
-                getLog().error(message);
-                throw new MojoExecutionException(message, exception);
-            }
+        try (var walk = Files.walk(Path.of(file.getAbsolutePath()))) {
+            walk.sorted(Comparator.reverseOrder()).forEach(w -> {
+                try {
+                    Files.delete(w);
+                } catch (final IOException exception) {
+                    throw new UncheckedIOException(exception);
+                }
+            });
+        } catch (final IOException | UncheckedIOException exception) {
+            final var message = "Deleting failed";
+            getLog().error(message);
+            throw new MojoExecutionException(message, exception);
         }
         getLog().info("Deletion successful");
-    }
-
-    /**
-     * Checks {@code file}
-     *
-     * @throws MojoExecutionException if {@code !file.exists || !file.canWrite}
-     * @since 0.0.1
-     */
-    void check() throws MojoExecutionException {
-        if (!file.exists()) {
-            final var message = "file does not exist";
-            getLog().error(message);
-            throw new MojoExecutionException(message);
-        } else if (!file.canWrite()) {
-            final var message = "file not writable";
-            getLog().error(message);
-            throw new MojoExecutionException(message);
-        }
     }
 
     /**
