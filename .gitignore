@@ -29,4 +29,5 @@
 .checkstyle
 .eclipse-pmd
 /.gradle/
-
+.pmd
+.ruleset
