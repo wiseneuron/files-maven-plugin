@@ -21,7 +21,10 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.MoreObjects;
 import java.io.File;
 import java.io.IOException;
-import org.apache.commons.io.FileUtils;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Comparator;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -34,9 +37,9 @@ import org.apache.maven.plugins.annotations.Parameter;
  * @author Lars Tennstedt
  * @since 0.0.1
  */
-<span class="pc bpc" id="L37" title="1 of 2 branches missed.">@Beta</span>
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">@Beta</span>
 @Mojo(name = &quot;delete&quot;)
-<span class="fc" id="L39">public final class DeleteMojo extends AbstractMojo {</span>
+<span class="fc" id="L42">public final class DeleteMojo extends AbstractMojo {</span>
     /**
      * File or directory which will be deleted
      */
@@ -50,43 +53,22 @@ import org.apache.maven.plugins.annotations.Parameter;
      */
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-<span class="fc" id="L53">        check();</span>
-<span class="fc" id="L54">        getLog().info(&quot;Deleting &quot; + file.getAbsolutePath());</span>
-<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (file.isFile()) {</span>
-<span class="pc bpc" id="L56" title="1 of 2 branches missed.">            if (!file.delete()) {</span>
-<span class="nc" id="L57">                final var message = &quot;Deletion failed&quot;;</span>
-<span class="nc" id="L58">                getLog().error(message);</span>
-<span class="nc" id="L59">                throw new MojoExecutionException(message);</span>
-            }
-        } else {
-            try {
-<span class="fc" id="L63">                FileUtils.deleteDirectory(file);</span>
-<span class="nc" id="L64">            } catch (final IOException exception) {</span>
-<span class="nc" id="L65">                final var message = &quot;Deletion failed&quot;;</span>
-<span class="nc" id="L66">                getLog().error(message);</span>
-<span class="nc" id="L67">                throw new MojoExecutionException(message, exception);</span>
-<span class="fc" id="L68">            }</span>
-        }
+<span class="fc" id="L56">        getLog().info(&quot;Deleting &quot; + file.getAbsolutePath());</span>
+<span class="fc" id="L57">        try (var walk = Files.walk(Path.of(file.getAbsolutePath()))) {</span>
+<span class="fc" id="L58">            walk.sorted(Comparator.reverseOrder()).forEach(w -&gt; {</span>
+                try {
+<span class="fc" id="L60">                    Files.delete(w);</span>
+<span class="nc" id="L61">                } catch (final IOException exception) {</span>
+<span class="nc" id="L62">                    throw new UncheckedIOException(exception);</span>
+<span class="fc" id="L63">                }</span>
+<span class="fc" id="L64">            });</span>
+<span class="nc" id="L65">        } catch (final IOException | UncheckedIOException exception) {</span>
+<span class="nc" id="L66">            final var message = &quot;Deleting failed&quot;;</span>
+<span class="nc" id="L67">            getLog().error(message);</span>
+<span class="nc" id="L68">            throw new MojoExecutionException(message, exception);</span>
+<span class="fc" id="L69">        }</span>
 <span class="fc" id="L70">        getLog().info(&quot;Deletion successful&quot;);</span>
 <span class="fc" id="L71">    }</span>
-
-    /**
-     * Checks {@code file}
-     *
-     * @throws MojoExecutionException if {@code !file.exists || !file.canWrite}
-     * @since 0.0.1
-     */
-    void check() throws MojoExecutionException {
-<span class="fc bfc" id="L80" title="All 2 branches covered.">        if (!file.exists()) {</span>
-<span class="fc" id="L81">            final var message = &quot;file does not exist&quot;;</span>
-<span class="fc" id="L82">            getLog().error(message);</span>
-<span class="fc" id="L83">            throw new MojoExecutionException(message);</span>
-<span class="fc bfc" id="L84" title="All 2 branches covered.">        } else if (!file.canWrite()) {</span>
-<span class="fc" id="L85">            final var message = &quot;file not writable&quot;;</span>
-<span class="fc" id="L86">            getLog().error(message);</span>
-<span class="fc" id="L87">            throw new MojoExecutionException(message);</span>
-        }
-<span class="fc" id="L89">    }</span>
 
     /**
      * {@inheritDoc}
@@ -95,18 +77,18 @@ import org.apache.maven.plugins.annotations.Parameter;
      */
     @Override
     public String toString() {
-<span class="fc" id="L98">        return MoreObjects.toStringHelper(this).add(&quot;file&quot;, file).toString();</span>
+<span class="fc" id="L80">        return MoreObjects.toStringHelper(this).add(&quot;file&quot;, file).toString();</span>
     }
 
     @VisibleForTesting
     File getFile() {
-<span class="fc" id="L103">        return file;</span>
+<span class="fc" id="L85">        return file;</span>
     }
 
     @VisibleForTesting
     void setFile(final File file) {
-<span class="pc bpc" id="L108" title="2 of 4 branches missed.">        assert file != null;</span>
-<span class="fc" id="L109">        this.file = file;</span>
-<span class="fc" id="L110">    }</span>
+<span class="pc bpc" id="L90" title="2 of 4 branches missed.">        assert file != null;</span>
+<span class="fc" id="L91">        this.file = file;</span>
+<span class="fc" id="L92">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

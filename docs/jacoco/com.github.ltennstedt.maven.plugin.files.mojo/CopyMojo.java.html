@@ -18,13 +18,15 @@ package com.github.ltennstedt.maven.plugin.files.mojo;
 
 import static java.util.Objects.requireNonNull;
 
-import com.github.ltennstedt.maven.plugin.files.util.Preconditions;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.MoreObjects;
 import java.io.File;
 import java.io.IOException;
-import org.apache.commons.io.FileUtils;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -39,7 +41,7 @@ import org.apache.maven.plugins.annotations.Parameter;
  */
 @Beta
 @Mojo(name = &quot;copy&quot;)
-<span class="fc" id="L42">public final class CopyMojo extends AbstractMojo {</span>
+<span class="fc" id="L44">public final class CopyMojo extends AbstractMojo {</span>
     /**
      * Source file or directory
      *
@@ -63,22 +65,32 @@ import org.apache.maven.plugins.annotations.Parameter;
      */
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-<span class="fc" id="L66">        Preconditions.checkFile(file, getLog());</span>
-<span class="fc" id="L67">        Preconditions.checkInto(into, getLog());</span>
 <span class="fc" id="L68">        getLog().info(&quot;Copying &quot; + file.getAbsolutePath() + &quot; into &quot; + into.getAbsolutePath());</span>
+<span class="fc" id="L69">        final var start = Path.of(file.getAbsolutePath());</span>
+<span class="fc" id="L70">        final var target = Path.of(into.getAbsolutePath());</span>
         try {
-<span class="fc bfc" id="L70" title="All 2 branches covered.">            if (file.isFile()) {</span>
-<span class="fc" id="L71">                FileUtils.copyFileToDirectory(file, into);</span>
+<span class="fc" id="L72">            Files.createDirectories(target);</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">            if (Files.isDirectory(start)) {</span>
+<span class="fc" id="L74">                try (var walk = Files.walk(start)) {</span>
+<span class="fc" id="L75">                    walk.forEach(w -&gt; {</span>
+                        try {
+<span class="fc" id="L77">                            Files.copy(w, target.resolve(start.relativize(w)), StandardCopyOption.REPLACE_EXISTING);</span>
+<span class="nc" id="L78">                        } catch (final IOException exception) {</span>
+<span class="nc" id="L79">                            throw new UncheckedIOException(exception);</span>
+<span class="fc" id="L80">                        }</span>
+<span class="fc" id="L81">                    });</span>
+
+                }
             } else {
-<span class="fc" id="L73">                FileUtils.copyDirectory(file, into);</span>
+<span class="fc" id="L85">                Files.copy(start, target, StandardCopyOption.REPLACE_EXISTING);</span>
             }
-<span class="nc" id="L75">        } catch (final IOException exception) {</span>
-<span class="nc" id="L76">            final var message = &quot;Copying failed&quot;;</span>
-<span class="nc" id="L77">            getLog().error(message);</span>
-<span class="nc" id="L78">            throw new MojoExecutionException(message, exception);</span>
-<span class="fc" id="L79">        }</span>
-<span class="fc" id="L80">        getLog().info(&quot;Copying successful&quot;);</span>
-<span class="fc" id="L81">    }</span>
+<span class="nc" id="L87">        } catch (final IOException | UncheckedIOException exception) {</span>
+<span class="nc" id="L88">            final var message = &quot;Copying failed&quot;;</span>
+<span class="nc" id="L89">            getLog().error(message);</span>
+<span class="nc" id="L90">            throw new MojoExecutionException(message, exception);</span>
+<span class="fc" id="L91">        }</span>
+<span class="fc" id="L92">        getLog().info(&quot;Copying successful&quot;);</span>
+<span class="fc" id="L93">    }</span>
 
     /**
      * {@inheritDoc}
@@ -87,29 +99,29 @@ import org.apache.maven.plugins.annotations.Parameter;
      */
     @Override
     public String toString() {
-<span class="fc" id="L90">        return MoreObjects.toStringHelper(this).add(&quot;file&quot;, file).add(&quot;into&quot;, into).toString();</span>
+<span class="fc" id="L102">        return MoreObjects.toStringHelper(this).add(&quot;file&quot;, file).add(&quot;into&quot;, into).toString();</span>
     }
 
     @VisibleForTesting
     public File getFile() {
-<span class="fc" id="L95">        return file;</span>
+<span class="fc" id="L107">        return file;</span>
     }
 
     @VisibleForTesting
     public void setFile(final File file) {
-<span class="fc" id="L100">        requireNonNull(file, &quot;file&quot;);</span>
-<span class="fc" id="L101">        this.file = file;</span>
-<span class="fc" id="L102">    }</span>
+<span class="fc" id="L112">        requireNonNull(file, &quot;file&quot;);</span>
+<span class="fc" id="L113">        this.file = file;</span>
+<span class="fc" id="L114">    }</span>
 
     @VisibleForTesting
     public File getInto() {
-<span class="fc" id="L106">        return into;</span>
+<span class="fc" id="L118">        return into;</span>
     }
 
     @VisibleForTesting
     public void setInto(final File into) {
-<span class="fc" id="L111">        requireNonNull(into, &quot;into&quot;);</span>
-<span class="fc" id="L112">        this.into = into;</span>
-<span class="fc" id="L113">    }</span>
+<span class="fc" id="L123">        requireNonNull(into, &quot;into&quot;);</span>
+<span class="fc" id="L124">        this.into = into;</span>
+<span class="fc" id="L125">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

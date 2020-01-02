@@ -16,13 +16,16 @@
 
 package com.github.ltennstedt.maven.plugin.files.mojo;
 
-import com.github.ltennstedt.maven.plugin.files.util.Preconditions;
 import com.google.common.annotations.Beta;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.MoreObjects;
 import java.io.File;
 import java.io.IOException;
-import org.apache.commons.io.FileUtils;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.Comparator;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -35,9 +38,9 @@ import org.apache.maven.plugins.annotations.Parameter;
  * @author Lars Tennstedt
  * @since 0.0.1
  */
-<span class="pc bpc" id="L38" title="1 of 2 branches missed.">@Beta</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">@Beta</span>
 @Mojo(name = &quot;move&quot;)
-<span class="fc" id="L40">public final class MoveMojo extends AbstractMojo {</span>
+<span class="fc" id="L43">public final class MoveMojo extends AbstractMojo {</span>
     /**
      * Source file or directory
      *
@@ -61,24 +64,44 @@ import org.apache.maven.plugins.annotations.Parameter;
      */
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-<span class="fc" id="L64">        Preconditions.checkFile(file, getLog());</span>
-<span class="fc" id="L65">        Preconditions.checkInto(into, getLog());</span>
-<span class="fc" id="L66">        getLog().info(&quot;Moving &quot; + file.getAbsolutePath() + &quot; into &quot; + into.getAbsolutePath());</span>
+<span class="fc" id="L67">        getLog().info(&quot;Moving &quot; + file.getAbsolutePath() + &quot; into &quot; + into.getAbsolutePath());</span>
+<span class="fc" id="L68">        final var start = Path.of(file.getAbsolutePath());</span>
+<span class="fc" id="L69">        final var target = Path.of(into.getAbsolutePath());</span>
         try {
-<span class="fc bfc" id="L68" title="All 2 branches covered.">            if (file.isFile()) {</span>
-<span class="fc" id="L69">                FileUtils.copyFileToDirectory(file, into);</span>
-<span class="fc" id="L70">                file.delete();</span>
+<span class="fc" id="L71">            Files.createDirectories(target);</span>
+<span class="fc bfc" id="L72" title="All 2 branches covered.">            if (Files.isDirectory(start)) {</span>
+<span class="fc" id="L73">                try (var walk = Files.walk(start)) {</span>
+<span class="fc" id="L74">                    walk.forEach(w -&gt; {</span>
+                        try {
+<span class="fc bfc" id="L76" title="All 2 branches covered.">                            if (Files.isDirectory(w)) {</span>
+<span class="fc" id="L77">                                Files.copy(w, target.resolve(start.relativize(w)), StandardCopyOption.REPLACE_EXISTING);</span>
+                            } else {
+<span class="fc" id="L79">                                Files.move(w, target.resolve(start.relativize(w)), StandardCopyOption.REPLACE_EXISTING);</span>
+                            }
+<span class="nc" id="L81">                        } catch (final IOException exception) {</span>
+<span class="nc" id="L82">                            throw new UncheckedIOException(exception);</span>
+<span class="fc" id="L83">                        }</span>
+<span class="fc" id="L84">                    });</span>
+                }
+<span class="fc" id="L86">                try (var walk = Files.walk(Path.of(file.getAbsolutePath()))) {</span>
+<span class="fc" id="L87">                    walk.sorted(Comparator.reverseOrder()).forEach(w -&gt; {</span>
+                        try {
+<span class="fc" id="L89">                            Files.delete(w);</span>
+<span class="nc" id="L90">                        } catch (final IOException exception) {</span>
+<span class="nc" id="L91">                            throw new UncheckedIOException(exception);</span>
+<span class="fc" id="L92">                        }</span>
+<span class="fc" id="L93">                    });</span>
+                }
             } else {
-<span class="fc" id="L72">                FileUtils.copyDirectory(file, into);</span>
-<span class="fc" id="L73">                FileUtils.deleteDirectory(file);</span>
+<span class="fc" id="L96">                Files.move(start, target, StandardCopyOption.REPLACE_EXISTING);</span>
             }
-<span class="nc" id="L75">        } catch (final IOException exception) {</span>
-<span class="nc" id="L76">            final var message = &quot;Moving failed&quot;;</span>
-<span class="nc" id="L77">            getLog().error(message);</span>
-<span class="nc" id="L78">            throw new MojoExecutionException(message, exception);</span>
-<span class="fc" id="L79">        }</span>
-<span class="fc" id="L80">        getLog().info(&quot;Moving successful&quot;);</span>
-<span class="fc" id="L81">    }</span>
+<span class="nc" id="L98">        } catch (final IOException | UncheckedIOException exception) {</span>
+<span class="nc" id="L99">            final var message = &quot;Moving failed&quot;;</span>
+<span class="nc" id="L100">            getLog().error(message);</span>
+<span class="nc" id="L101">            throw new MojoExecutionException(message, exception);</span>
+<span class="fc" id="L102">        }</span>
+<span class="fc" id="L103">        getLog().info(&quot;Moving successful&quot;);</span>
+<span class="fc" id="L104">    }</span>
 
     /**
      * {@inheritDoc}
@@ -87,29 +110,29 @@ import org.apache.maven.plugins.annotations.Parameter;
      */
     @Override
     public String toString() {
-<span class="fc" id="L90">        return MoreObjects.toStringHelper(this).add(&quot;file&quot;, file).add(&quot;into&quot;, into).toString();</span>
+<span class="fc" id="L113">        return MoreObjects.toStringHelper(this).add(&quot;file&quot;, file).add(&quot;into&quot;, into).toString();</span>
     }
 
     @VisibleForTesting
     File getFile() {
-<span class="fc" id="L95">        return file;</span>
+<span class="fc" id="L118">        return file;</span>
     }
 
     @VisibleForTesting
     void setFile(final File file) {
-<span class="pc bpc" id="L100" title="2 of 4 branches missed.">        assert file != null;</span>
-<span class="fc" id="L101">        this.file = file;</span>
-<span class="fc" id="L102">    }</span>
+<span class="pc bpc" id="L123" title="2 of 4 branches missed.">        assert file != null;</span>
+<span class="fc" id="L124">        this.file = file;</span>
+<span class="fc" id="L125">    }</span>
 
     @VisibleForTesting
     File getInto() {
-<span class="fc" id="L106">        return into;</span>
+<span class="fc" id="L129">        return into;</span>
     }
 
     @VisibleForTesting
     void setInto(final File into) {
-<span class="pc bpc" id="L111" title="2 of 4 branches missed.">        assert into != null;</span>
-<span class="fc" id="L112">        this.into = into;</span>
-<span class="fc" id="L113">    }</span>
+<span class="pc bpc" id="L134" title="2 of 4 branches missed.">        assert into != null;</span>
+<span class="fc" id="L135">        this.into = into;</span>
+<span class="fc" id="L136">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
