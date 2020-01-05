@@ -165,5 +165,6 @@ friendly.
 * [SonarSource](https://www.sonarsource.com/) for [SonarLint](https://www.sonarlint.org/), 
 [SonarQube](https://www.sonarqube.org/) and [SonarCloud](https://sonarcloud.io/)
 * GitHub for [GitHub](https://github.com/)
+* the developers of [EditorConfig](https://editorconfig.org/)
 * Stack Exchange for [Stack Overflow](https://stackoverflow.com/)
 * Shields.io for [Shields.io](https://shields.io/)
