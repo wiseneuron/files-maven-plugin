@@ -2,6 +2,17 @@
 Maven plugin for copying, moving and deleting files and directories
 
 [![Workflow Status](https://github.com/ltennstedt/files-maven-plugin/workflows/JAVA%20CI/badge.svg)]
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=ltennstedt_files-maven-plugin&metric=bugs)](https://sonarcloud.io/dashboard?id=ltennstedt_files-maven-plugin)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=ltennstedt_files-maven-plugin&metric=code_smells)](https://sonarcloud.io/dashboard?id=ltennstedt_files-maven-plugin)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ltennstedt_files-maven-plugin&metric=coverage)](https://sonarcloud.io/dashboard?id=ltennstedt_files-maven-plugin)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=ltennstedt_files-maven-plugin&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=ltennstedt_files-maven-plugin)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=ltennstedt_files-maven-plugin&metric=ncloc)](https://sonarcloud.io/dashboard?id=ltennstedt_files-maven-plugin)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=ltennstedt_files-maven-plugin&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=ltennstedt_files-maven-plugin)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ltennstedt_files-maven-plugin&metric=alert_status)](https://sonarcloud.io/dashboard?id=ltennstedt_files-maven-plugin)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=ltennstedt_files-maven-plugin&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=ltennstedt_files-maven-plugin)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=ltennstedt_files-maven-plugin&metric=security_rating)](https://sonarcloud.io/dashboard?id=ltennstedt_files-maven-plugin)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=ltennstedt_files-maven-plugin&metric=sqale_index)](https://sonarcloud.io/dashboard?id=ltennstedt_files-maven-plugin)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=ltennstedt_files-maven-plugin&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=ltennstedt_files-maven-plugin)
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](http://shields.io)
 [![JCenter](https://img.shields.io/badge/jcenter-2-green.svg)](http://shields.io)
 
@@ -151,6 +162,8 @@ friendly.
 * the developers of [PMD](https://pmd.github.io/)
 * the developers of [JaCoCo](https://www.eclemma.org/jacoco/index.html) and 
 [EclEmma](https://www.eclemma.org/index.html)
+* [SonarSource](https://www.sonarsource.com/) for [SonarLint](https://www.sonarlint.org/), 
+[SonarQube](https://www.sonarqube.org/) and [SonarCloud](https://sonarcloud.io/)
 * GitHub for [GitHub](https://github.com/)
 * Stack Exchange for [Stack Overflow](https://stackoverflow.com/)
 * Shields.io for [Shields.io](https://shields.io/)
