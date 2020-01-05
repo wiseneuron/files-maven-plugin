@@ -14,12 +14,12 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.m2
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
     - run: mvn -B clean compile test-compile
     - name: Upload artifact
       uses: actions/upload-artifact@v1
       with:
-        name: classes
+        name: target
         path: target
   test:
     runs-on: ubuntu-latest
@@ -35,16 +35,16 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.m2
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
     - name: Download artifact
       uses: actions/download-artifact@v1
       with:
-        name: classes
+        name: target
     - run: mvn -B test
     - name: Upload artifact
       uses: actions/upload-artifact@v1
       with:
-        name: tests
+        name: target
         path: target
   check:
     runs-on: ubuntu-latest
@@ -60,11 +60,11 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.m2
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
     - name: Download artifact
       uses: actions/download-artifact@v1
       with:
-        name: classes
+        name: target
     - run: mvn -B checkstyle:check pmd:check spotbugs:check
   coverage:
     runs-on: ubuntu-latest
@@ -80,16 +80,16 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.m2
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
     - name: Download artifact
       uses: actions/download-artifact@v1
       with:
-        name: tests
+        name: target
     - run: mvn -B jacoco:report
     - name: Upload artifact
       uses: actions/upload-artifact@v1
       with:
-        name: coverage
+        name: target
         path: target
   package:
     runs-on: ubuntu-latest
@@ -105,16 +105,16 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.m2
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
     - name: Download artifact
       uses: actions/download-artifact@v1
       with:
-        name: classes
+        name: target
     - run: mvn -B jar:jar javadoc:jar source:jar-no-fork
     - name: Upload artifact
       uses: actions/upload-artifact@v1
       with:
-        name: package
+        name: target
         path: target
   site:
     runs-on: ubuntu-latest
@@ -129,7 +129,7 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ~/.m2
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
     - run: mvn -B site
     - name: Upload artifact
       uses: actions/upload-artifact@v1
