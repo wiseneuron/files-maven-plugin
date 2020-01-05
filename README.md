@@ -1,8 +1,7 @@
 # files-maven-plugin
 Maven plugin for copying, moving and deleting files and directories
 
-[![Build Status](https://travis-ci.org/ltennstedt/files-maven-plugin.svg?branch=master)](https://travis-ci.org/ltennstedt/files-maven-plugin)
-[![codecov](https://codecov.io/gh/ltennstedt/files-maven-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/ltennstedt/files-maven-plugin)
+[![Workflow Status](https://github.com/ltennstedt/files-maven-plugin/workflows/JAVA%20CI/badge.svg)]
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](http://shields.io)
 [![JCenter](https://img.shields.io/badge/jcenter-2-green.svg)](http://shields.io)
 
@@ -23,7 +22,8 @@ The files-maven-plugin is written in Java, is very simplistic and does not very 
 
 ## Implementation details
 * Java 11
-* All leaf classes are final.
+* All classes are final.
+* Uses `java.nio.file.*` for all file system operations
 * Useful toString methods
 
 ## Information
@@ -98,7 +98,6 @@ pom.xml
         </plugin>
     </plugins>
 </build>
-
 ```
 
 ## Building
@@ -138,18 +137,20 @@ friendly.
 * Please show some love with your code, tests and build file 
 
 ## Thanks to
-* Oracle for the JVM, Java and OpenJDK
-* Google for Guava
-* the Apache Software Foundation for Maven, Commons Lang, Commons IO and the Apache License
-* Joel Costigliola for AssertJ
-* the JUnit team for JUnit
-* Linus Torvalds for Git
-* the developers of Checkstyle
-* the developers of SpotBugs
-* the developers of PMD
-* the developers of JaCoCo and EclEmma
-* GitHub for GitHub
-* Travis CI for Travis CI
-* Codecov for Codecov
-* Stack Exchange for Stack Overflow
-* Shields.io for Shields.io
+* [Oracle](https://www.oracle.com/) for [Java](https://www.java.com/) and [OpenJDK](https://openjdk.java.net/)
+* [Google](https://about.google/) for [Guava](https://github.com/google/guava/)
+* the [Apache Software Foundation](http://apache.org/) for [Maven](http://maven.apache.org/), 
+[Commons Lang](http://commons.apache.org/proper/commons-lang/), 
+[Commons IO](http://commons.apache.org/proper/commons-io/) and the 
+[Apache License](http://apache.org/licenses/LICENSE-2.0)
+* Joel Costigliola for [AssertJ](https://joel-costigliola.github.io/assertj/)
+* the JUnit team for [JUnit](https://junit.org/)
+* Linus Torvalds for [Git](https://git-scm.com/)
+* the developers of [Checkstyle](https://checkstyle.org/)
+* the developers of [SpotBugs](https://spotbugs.github.io/)
+* the developers of [PMD](https://pmd.github.io/)
+* the developers of [JaCoCo](https://www.eclemma.org/jacoco/index.html) and 
+[EclEmma](https://www.eclemma.org/index.html)
+* GitHub for [GitHub](https://github.com/)
+* Stack Exchange for [Stack Overflow](https://stackoverflow.com/)
+* Shields.io for [Shields.io](https://shields.io/)
