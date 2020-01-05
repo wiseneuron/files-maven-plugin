@@ -20,7 +20,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: classes
-        path: $GITHUB_WORKSPACE/target
+        path: target
   test:
     runs-on: ubuntu-latest
     steps:
@@ -44,7 +44,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: tests
-        path: $GITHUB_WORKSPACE/target
+        path: target
   check:
     runs-on: ubuntu-latest
     steps:
@@ -87,7 +87,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: coverage
-        path: $GITHUB_WORKSPACE/target
+        path: target
   package:
     runs-on: ubuntu-latest
     steps:
@@ -111,7 +111,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: package
-        path: $GITHUB_WORKSPACE/target
+        path: target
   site:
     runs-on: ubuntu-latest
     steps:
@@ -131,4 +131,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: site
-        path: $GITHUB_WORKSPACE/target
+        path: target
