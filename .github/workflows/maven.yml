@@ -1,5 +1,10 @@
 name: Java CI
-on: push
+on: 
+  push:
+    paths-ignore: 
+      - 'docs/**'
+      - 'LICENSE'
+      - 'README.md'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -91,6 +96,26 @@ jobs:
       with:
         name: target
         path: target
+  sonar:
+    runs-on: ubuntu-latest
+    needs: coverage
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
+    - name: Download artifact
+      uses: actions/download-artifact@v1
+      with:
+        name: target
+    - run: mvn -B sonar:sonar -Dsonar.login="${{ secrets.SONAR_TOKEN }}"
   package:
     runs-on: ubuntu-latest
     needs: build
