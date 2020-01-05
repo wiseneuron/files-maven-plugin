@@ -1,0 +1,138 @@
+name: Java CI
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
+    - run: mvn -B clean compile test-compile
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: target
+        path: target
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
+    - name: Download artifact
+      uses: actions/download-artifact@v1
+      with:
+        name: target
+    - run: mvn -B test
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: target
+        path: target
+  check:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
+    - name: Download artifact
+      uses: actions/download-artifact@v1
+      with:
+        name: target
+    - run: mvn -B checkstyle:check pmd:check spotbugs:check
+  coverage:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
+    - name: Download artifact
+      uses: actions/download-artifact@v1
+      with:
+        name: target
+    - run: mvn -B jacoco:report
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: target
+        path: target
+  package:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
+    - name: Download artifact
+      uses: actions/download-artifact@v1
+      with:
+        name: target
+    - run: mvn -B jar:jar javadoc:jar source:jar-no-fork
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: target
+        path: target
+  site:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml') }}
+    - run: mvn -B site
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: site
+        path: target
