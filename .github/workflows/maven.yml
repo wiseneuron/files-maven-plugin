@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: Set up Java
       uses: actions/setup-java@v1
       with:
@@ -20,12 +20,12 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: classes
-        path: $GITHUB_WORKSPACE/target
+        path: ${{ GITHUB_WORKSPACE }}/target
   test:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: Set up Java
       uses: actions/setup-java@v1
       with:
@@ -44,12 +44,12 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: tests
-        path: $GITHUB_WORKSPACE/target
+        path: ${{ GITHUB_WORKSPACE }}/target
   check:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: Set up Java
       uses: actions/setup-java@v1
       with:
@@ -68,7 +68,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: Set up Java
       uses: actions/setup-java@v1
       with:
@@ -87,12 +87,12 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: coverage
-        path: $GITHUB_WORKSPACE/target
+        path: ${{ GITHUB_WORKSPACE }}/target
   package:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: Set up Java
       uses: actions/setup-java@v1
       with:
@@ -111,12 +111,12 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: package
-        path: $GITHUB_WORKSPACE/target
+        path: ${{ GITHUB_WORKSPACE }}/target
   site:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: Set up Java
       uses: actions/setup-java@v1
       with:
@@ -131,4 +131,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: site
-        path: $GITHUB_WORKSPACE/target
+        path: ${{ GITHUB_WORKSPACE }}/target
