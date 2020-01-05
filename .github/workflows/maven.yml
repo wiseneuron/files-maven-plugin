@@ -1,0 +1,111 @@
+name: Java CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+    - name: Cache artifacts
+      uses: actions/cache@v1
+      with:
+        path: $GITHUB_WORKSPACE/target
+    - run: mvn -B clean compile testCompile
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+    - name: Cache artifacts
+      uses: actions/cache@v1
+      with:
+        path: $GITHUB_WORKSPACE/target
+    - run: mvn -B test
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+    - name: Cache artifacts
+      uses: actions/cache@v1
+      with:
+        path: $GITHUB_WORKSPACE/target
+    - run: mvn -B checkstyle:check pmd:check spotbugs:check
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+    - name: Cache artifacts
+      uses: actions/cache@v1
+      with:
+        path: $GITHUB_WORKSPACE/target
+    - run: mvn -B jacoco:report
+  package:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+    - name: Cache artifacts
+      uses: actions/cache@v1
+      with:
+        path: $GITHUB_WORKSPACE/target
+    - run: mvn -B jar:jar javadoc:jar source_jar-no-fork
+  site:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Set up Java
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+    - name: Cache dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+    - name: Cache artifacts
+      uses: actions/cache@v1
+      with:
+        path: $GITHUB_WORKSPACE/target
+    - run: mvn -B site
