@@ -1,7 +1,7 @@
 # files-maven-plugin
 Maven plugin for copying, moving and deleting files and directories
 
-[![Workflow Status](https://github.com/ltennstedt/files-maven-plugin/workflows/JAVA%20CI/badge.svg)]
+[![Workflow Status](https://github.com/ltennstedt/files-maven-plugin/workflows/Java%20CI/badge.svg)]
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=ltennstedt_files-maven-plugin&metric=bugs)](https://sonarcloud.io/dashboard?id=ltennstedt_files-maven-plugin)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=ltennstedt_files-maven-plugin&metric=code_smells)](https://sonarcloud.io/dashboard?id=ltennstedt_files-maven-plugin)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ltennstedt_files-maven-plugin&metric=coverage)](https://sonarcloud.io/dashboard?id=ltennstedt_files-maven-plugin)
