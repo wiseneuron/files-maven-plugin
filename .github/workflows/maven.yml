@@ -20,7 +20,7 @@ jobs:
       with:
         path: $GITHUB_WORKSPACE/target
         key: ${{ runner.os }}-maven-artifacts-${{ hashFiles('**/pom.xml') }}
-    - run: mvn -B clean compile testCompile
+    - run: mvn -B clean compile test-compile
   test:
     runs-on: ubuntu-latest
     steps:
