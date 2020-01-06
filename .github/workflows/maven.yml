@@ -202,13 +202,12 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
-    - run: rm -Rf *
     - name: Download artifact
       uses: actions/download-artifact@v1
       with:
         name: target
     - run: |
-        rm -R apidocs css images jacoco *.html 
+        rm -Rf apidocs css images jacoco *.html 
         mv target/site .
     - name: Simple commit
       uses: zwaldowski/git-commit-action@v1
