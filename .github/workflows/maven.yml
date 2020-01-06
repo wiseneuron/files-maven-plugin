@@ -2,8 +2,7 @@ name: Java CI
 on: 
   push:
     branches-ignore: gh-pages
-    paths-ignore: 
-      - 'docs/**'
+    paths-ignore:
       - '.editorconfig'
       - 'LICENSE'
       - 'README.md'
@@ -207,7 +206,7 @@ jobs:
       with:
         name: target
     - run: |
-        rm -Rf apidocs css images jacoco *.html 
+        rm -Rf site
         mv target/site .
         git config --local user.name "GitHub Actions"
         git config --local user.email "27898583+ltennstedt@users.noreply.github.com"
