@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"com.github.ltennstedt.maven.plugin.files.mojo","l":"CopyMojo"},{"p":"com.github.ltennstedt.maven.plugin.files.mojo","l":"DeleteMojo"},{"p":"com.github.ltennstedt.maven.plugin.files.mojo","l":"MoveMojo"}]
