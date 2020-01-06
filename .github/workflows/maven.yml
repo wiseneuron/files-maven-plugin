@@ -1,7 +1,7 @@
 name: Java CI
 on: 
   push:
-    branches-ignore: pages
+    branches-ignore: gh-pages
     paths-ignore: 
       - 'docs/**'
       - '.editorconfig'
@@ -197,7 +197,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       with:
-        ref: pages
+        ref: gh-pages
     - name: Set up Java
       uses: actions/setup-java@v1
       with:
@@ -218,4 +218,4 @@ jobs:
       uses: ad-m/github-push-action@v0.5.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: pages
+        branch: gh-pages
