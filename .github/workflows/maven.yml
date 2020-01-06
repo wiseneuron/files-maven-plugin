@@ -1,6 +1,7 @@
 name: Java CI
 on: 
   push:
+    branches-ignore: pages
     paths-ignore: 
       - 'docs/**'
       - '.editorconfig'
@@ -195,21 +196,26 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+      with:
+        ref: pages
     - name: Set up Java
       uses: actions/setup-java@v1
       with:
         java-version: 11
+    - run: rm -Rf *
     - name: Download artifact
       uses: actions/download-artifact@v1
       with:
         name: target
-    - run: ant
     - run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add docs/
-        git commit -m "Docs"
+        rm -R apidocs css images jacoco *.html 
+        mv target/site .
+    - name: Simple commit
+      uses: zwaldowski/git-commit-action@v1
+      with:
+        commit_message: "Pages"
     - name: Push changes
       uses: ad-m/github-push-action@v0.5.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: pages
