@@ -209,10 +209,9 @@ jobs:
     - run: |
         rm -Rf apidocs css images jacoco *.html 
         mv target/site .
-    - name: Simple commit
-      uses: zwaldowski/git-commit-action@v1
-      with:
-        commit_message: "Pages"
+        git config --local user.name "GitHub Actions"
+        git config --local user.email "actions@github.com"
+        git commit -m "Pages" -a
     - name: Push changes
       uses: ad-m/github-push-action@v0.5.0
       with:
