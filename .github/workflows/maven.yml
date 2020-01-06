@@ -210,7 +210,7 @@ jobs:
         rm -Rf apidocs css images jacoco *.html 
         mv target/site .
         git config --local user.name "GitHub Actions"
-        git config --local user.email "actions@github.com"
+        git config --local user.email "27898583+ltennstedt@users.noreply.github.com"
         git add site
         git commit -m "Pages"
     - name: Push changes
