@@ -371,8 +371,8 @@
         <url>https://github.com/ltennstedt/files-maven-plugin/issues</url>
     </issueManagement>
     <ciManagement>
-        <system>Travis CI</system>
-        <url>https://travis-ci.org/ltennstedt/files-maven-plugin</url>
+        <system>GitHub Actions</system>
+        <url>https://github.com/ltennstedt/files-maven-plugin</url>
     </ciManagement>
     <scm>
         <connection>scm:git:https://github.com/ltennstedt/files-maven-plugin.git</connection>
