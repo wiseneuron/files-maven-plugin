@@ -38,8 +38,7 @@ The files-maven-plugin is written in Java, is very simplistic and does not very 
 * Useful toString methods
 
 ## Information
-* Maven site: https://ltennstedt.github.io/files-maven-plugin/index.html
-* Maven plugin docs: https://ltennstedt.github.io/files-maven-plugin/plugin-info.html
+* [Maven site](https://ltennstedt.github.io/files-maven-plugin/site/index.html)
 
 files-maven-plugin is open source and free software and is licensed under the permissive Apache License.
 
