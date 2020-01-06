@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CopyMojo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">files-maven-plugin</a> &gt; <a href="index.source.html" class="el_package">com.github.ltennstedt.maven.plugin.files.mojo</a> &gt; <span class="el_source">CopyMojo.java</span></div><h1>CopyMojo.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2017 Lars Tennstedt
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.github.ltennstedt.maven.plugin.files.mojo;
+
+import static java.util.Objects.requireNonNull;
+
+import com.google.common.annotations.Beta;
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.MoreObjects;
+import java.io.File;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
+
+/**
+ * Mojo for copying files and directories
+ *
+ * @author Lars Tennstedt
+ * @since 0.0.1
+ */
+@Beta
+@Mojo(name = &quot;copy&quot;)
+<span class="fc" id="L44">public final class CopyMojo extends AbstractMojo {</span>
+    /**
+     * Source file or directory
+     *
+     * @since 0.0.1
+     */
+    @Parameter(required = true)
+    private File file;
+
+    /**
+     * Target directory
+     *
+     * @since 0.0.1
+     */
+    @Parameter(required = true)
+    private File into;
+
+    /**
+     * {@inheritDoc}
+     *
+     * @since 0.0.1
+     */
+    @Override
+    public void execute() throws MojoExecutionException, MojoFailureException {
+<span class="fc" id="L68">        getLog().info(&quot;Copying &quot; + file.getAbsolutePath() + &quot; into &quot; + into.getAbsolutePath());</span>
+<span class="fc" id="L69">        final var start = Path.of(file.getAbsolutePath());</span>
+<span class="fc" id="L70">        final var target = Path.of(into.getAbsolutePath());</span>
+        try {
+<span class="fc" id="L72">            Files.createDirectories(target);</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">            if (Files.isDirectory(start)) {</span>
+<span class="fc" id="L74">                try (var walk = Files.walk(start)) {</span>
+<span class="fc" id="L75">                    walk.forEach(w -&gt; {</span>
+                        try {
+<span class="fc" id="L77">                            Files.copy(w, target.resolve(start.relativize(w)), StandardCopyOption.REPLACE_EXISTING);</span>
+<span class="nc" id="L78">                        } catch (final IOException exception) {</span>
+<span class="nc" id="L79">                            throw new UncheckedIOException(exception);</span>
+<span class="fc" id="L80">                        }</span>
+<span class="fc" id="L81">                    });</span>
+
+                }
+            } else {
+<span class="fc" id="L85">                Files.copy(start, target, StandardCopyOption.REPLACE_EXISTING);</span>
+            }
+<span class="nc" id="L87">        } catch (final IOException | UncheckedIOException exception) {</span>
+<span class="nc" id="L88">            final var message = &quot;Copying failed&quot;;</span>
+<span class="nc" id="L89">            getLog().error(message);</span>
+<span class="nc" id="L90">            throw new MojoExecutionException(message, exception);</span>
+<span class="fc" id="L91">        }</span>
+<span class="fc" id="L92">        getLog().info(&quot;Copying successful&quot;);</span>
+<span class="fc" id="L93">    }</span>
+
+    /**
+     * {@inheritDoc}
+     *
+     * @since 0.0.1
+     */
+    @Override
+    public String toString() {
+<span class="fc" id="L102">        return MoreObjects.toStringHelper(this).add(&quot;file&quot;, file).add(&quot;into&quot;, into).toString();</span>
+    }
+
+    @VisibleForTesting
+    public File getFile() {
+<span class="fc" id="L107">        return file;</span>
+    }
+
+    @VisibleForTesting
+    public void setFile(final File file) {
+<span class="fc" id="L112">        requireNonNull(file, &quot;file&quot;);</span>
+<span class="fc" id="L113">        this.file = file;</span>
+<span class="fc" id="L114">    }</span>
+
+    @VisibleForTesting
+    public File getInto() {
+<span class="fc" id="L118">        return into;</span>
+    }
+
+    @VisibleForTesting
+    public void setInto(final File into) {
+<span class="fc" id="L123">        requireNonNull(into, &quot;into&quot;);</span>
+<span class="fc" id="L124">        this.into = into;</span>
+<span class="fc" id="L125">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
